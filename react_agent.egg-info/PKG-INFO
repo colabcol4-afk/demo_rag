@@ -14,9 +14,20 @@ Requires-Dist: langchain>=0.2.14
 Requires-Dist: langchain-fireworks>=0.1.7
 Requires-Dist: python-dotenv>=1.0.1
 Requires-Dist: httpx>=0.24.0
+Requires-Dist: streamlit>=1.28.0
+Requires-Dist: langchain-nvidia-ai-endpoints
+Requires-Dist: langchain-qdrant
+Requires-Dist: langchain-classic
+Requires-Dist: qdrant-client>=1.7.0
+Requires-Dist: llmwhisperer-client
 Provides-Extra: dev
 Requires-Dist: mypy>=1.11.1; extra == "dev"
 Requires-Dist: ruff>=0.6.1; extra == "dev"
+Provides-Extra: rag
+Requires-Dist: langchain-nvidia-ai-endpoints>=0.1.0; extra == "rag"
+Requires-Dist: langchain-qdrant>=0.1.0; extra == "rag"
+Requires-Dist: langchain-classic>=0.1.0; extra == "rag"
+Requires-Dist: qdrant-client>=1.7.0; extra == "rag"
 Dynamic: license-file
 
 # LangGraph ReAct Agent Template

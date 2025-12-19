@@ -5,7 +5,19 @@ langchain>=0.2.14
 langchain-fireworks>=0.1.7
 python-dotenv>=1.0.1
 httpx>=0.24.0
+streamlit>=1.28.0
+langchain-nvidia-ai-endpoints
+langchain-qdrant
+langchain-classic
+qdrant-client>=1.7.0
+llmwhisperer-client
 
 [dev]
 mypy>=1.11.1
 ruff>=0.6.1
+
+[rag]
+langchain-nvidia-ai-endpoints>=0.1.0
+langchain-qdrant>=0.1.0
+langchain-classic>=0.1.0
+qdrant-client>=1.7.0
