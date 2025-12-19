@@ -8,12 +8,13 @@ Features:
 - Returns top 5 most relevant results
 - Clear formatting and demarkation of results
 - Production-ready error handling
+- Lazy initialization for Streamlit compatibility
 """
 
 import sys
 import os
 from pathlib import Path
-from typing import List, Sequence
+from typing import List, Sequence, Optional
 from langchain_core.documents import Document
 from langchain_core.callbacks import Callbacks
 from langchain_core.prompts import ChatPromptTemplate
@@ -43,6 +44,12 @@ GROQ_MODEL = "deepseek-r1-distill-llama-70b"
 # Retrieval Configuration
 INITIAL_RETRIEVAL_COUNT = 15  # Get top 15 from vector store
 FINAL_RESULT_COUNT = 5  # Re-rank and return top 5
+
+
+# --- GLOBAL CACHE FOR LAZY INITIALIZATION ---
+_vector_store: Optional[QdrantVectorStore] = None
+_compression_retriever: Optional[ContextualCompressionRetriever] = None
+_initialization_error: Optional[str] = None
 
 
 # --- ENVIRONMENT VALIDATION ---
@@ -81,33 +88,34 @@ Please set these in your Streamlit Cloud secrets:
     print("✅ All environment variables loaded successfully")
 
 
-# Validate immediately on import
-validate_environment()
+# --- LAZY INITIALIZATION FUNCTIONS ---
+
+def initialize_embeddings():
+    """Initialize NVIDIA embeddings (called lazily)."""
+    try:
+        dense_embeddings = NVIDIAEmbeddings(
+            api_key=NVIDIA_API_KEY,
+            model=NVIDIA_MODEL,
+            truncate="END"
+        )
+        print(f"✅ NVIDIA Embeddings initialized: {NVIDIA_MODEL}")
+        return dense_embeddings
+    except Exception as e:
+        raise ConnectionError(f"❌ Failed to initialize NVIDIA embeddings: {e}")
 
 
-# --- INITIALIZE MODELS ---
-
-# Dense Embeddings (NVIDIA)
-try:
-    dense_embeddings = NVIDIAEmbeddings(
-        api_key=NVIDIA_API_KEY,
-        model=NVIDIA_MODEL,
-        truncate="END"
-    )
-    print(f"✅ NVIDIA Embeddings initialized: {NVIDIA_MODEL}")
-except Exception as e:
-    raise ConnectionError(f"❌ Failed to initialize NVIDIA embeddings: {e}")
-
-# Re-ranker LLM (Groq)
-try:
-    llm = ChatGroq(
-        api_key=GROQ_API_KEY,
-        model=GROQ_MODEL,
-        temperature=0,
-    )
-    print(f"✅ Groq LLM initialized: {GROQ_MODEL}")
-except Exception as e:
-    raise ConnectionError(f"❌ Failed to initialize Groq LLM: {e}")
+def initialize_llm():
+    """Initialize Groq LLM (called lazily)."""
+    try:
+        llm = ChatGroq(
+            api_key=GROQ_API_KEY,
+            model=GROQ_MODEL,
+            temperature=0,
+        )
+        print(f"✅ Groq LLM initialized: {GROQ_MODEL}")
+        return llm
+    except Exception as e:
+        raise ConnectionError(f"❌ Failed to initialize Groq LLM: {e}")
 
 
 # --- CUSTOM GROQ RE-RANKER ---
@@ -157,20 +165,38 @@ class GroqReranker(BaseDocumentCompressor):
             return documents[:self.top_n]
 
 
-# --- VECTOR STORE INITIALIZATION (with error handling) ---
-def initialize_vector_store():
+# --- VECTOR STORE INITIALIZATION (LAZY) ---
+def get_vector_store() -> QdrantVectorStore:
     """
-    Initialize vector store with proper error handling and validation.
+    Get or initialize the vector store (lazy loading).
     
     Returns:
         QdrantVectorStore: Initialized vector store
         
     Raises:
-        ConnectionError: If connection to Qdrant fails
-        ValueError: If collection doesn't exist
+        ConnectionError: If initialization fails
     """
+    global _vector_store, _initialization_error
+    
+    # If already initialized, return cached instance
+    if _vector_store is not None:
+        return _vector_store
+    
+    # If previous initialization failed, raise the cached error
+    if _initialization_error is not None:
+        raise ConnectionError(_initialization_error)
+    
+    # Try to initialize
     try:
-        # Test connection first
+        print("🔄 Initializing vector store (first time)...")
+        
+        # Validate environment first
+        validate_environment()
+        
+        # Initialize embeddings
+        dense_embeddings = initialize_embeddings()
+        
+        # Test connection
         print(f"🔗 Connecting to Qdrant at: {QDRANT_URL[:50]}...")
         test_client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
         
@@ -189,11 +215,12 @@ Available collections: {collection_names if collection_names else 'None'}
 2. Or create it manually in Qdrant dashboard
 3. Make sure the collection name matches: '{COLLECTION_NAME}'
             """
+            _initialization_error = error_msg
             raise ValueError(error_msg)
         
         print(f"✅ Collection '{COLLECTION_NAME}' found")
         
-        # Collection exists, create vector store
+        # Create vector store
         vector_store = QdrantVectorStore.from_existing_collection(
             embedding=dense_embeddings,
             collection_name=COLLECTION_NAME,
@@ -203,6 +230,9 @@ Available collections: {collection_names if collection_names else 'None'}
         )
         
         print(f"✅ Successfully connected to Qdrant vector store")
+        
+        # Cache the vector store
+        _vector_store = vector_store
         return vector_store
         
     except ValueError:
@@ -217,28 +247,46 @@ Error: {str(e)}
 🔧 Troubleshooting:
 1. Check QDRANT_URL is correct (currently: {QDRANT_URL[:50]}...)
 2. Verify QDRANT_API_KEY is set correctly
-3. Ensure collection '{COLLECTION_NAME}' exists in Qdrant
+3. Ensure collection '{COLLECTION_NAME}' exists
 4. Check network connectivity to Qdrant
 5. Verify Qdrant service is running
         """
+        _initialization_error = error_msg
         raise ConnectionError(error_msg) from e
 
 
-# Initialize vector store
-vector_store = initialize_vector_store()
-
-
-# --- SETUP RETRIEVAL PIPELINE ---
-base_retriever = vector_store.as_retriever(search_kwargs={"k": INITIAL_RETRIEVAL_COUNT})
-reranker = GroqReranker(llm=llm, top_n=FINAL_RESULT_COUNT)
-
-compression_retriever = ContextualCompressionRetriever(
-    base_compressor=reranker,
-    base_retriever=base_retriever
-)
-
-print("✅ Retrieval pipeline initialized successfully")
-print(f"📊 Configuration: Initial retrieval={INITIAL_RETRIEVAL_COUNT}, Final results={FINAL_RESULT_COUNT}")
+def get_retriever() -> ContextualCompressionRetriever:
+    """
+    Get or initialize the compression retriever (lazy loading).
+    
+    Returns:
+        ContextualCompressionRetriever: Initialized retriever
+    """
+    global _compression_retriever
+    
+    # If already initialized, return cached instance
+    if _compression_retriever is not None:
+        return _compression_retriever
+    
+    # Initialize components
+    vector_store = get_vector_store()
+    llm = initialize_llm()
+    
+    # Setup retrieval pipeline
+    base_retriever = vector_store.as_retriever(search_kwargs={"k": INITIAL_RETRIEVAL_COUNT})
+    reranker = GroqReranker(llm=llm, top_n=FINAL_RESULT_COUNT)
+    
+    compression_retriever = ContextualCompressionRetriever(
+        base_compressor=reranker,
+        base_retriever=base_retriever
+    )
+    
+    print("✅ Retrieval pipeline initialized successfully")
+    print(f"📊 Configuration: Initial retrieval={INITIAL_RETRIEVAL_COUNT}, Final results={FINAL_RESULT_COUNT}")
+    
+    # Cache the retriever
+    _compression_retriever = compression_retriever
+    return compression_retriever
 
 
 # --- RETRIEVAL FUNCTION ---
@@ -259,13 +307,16 @@ def retrieve(query: str, top_k: int = 5, verbose: bool = True) -> List[Document]
         print("⚠️ Empty query provided")
         return []
     
-    # Update the reranker's top_n if different from default
-    if top_k != FINAL_RESULT_COUNT:
-        reranker.top_n = top_k
-
     try:
+        # Get retriever (lazy initialization)
+        retriever = get_retriever()
+        
+        # Update the reranker's top_n if different from default
+        if hasattr(retriever.base_compressor, 'top_n'):
+            retriever.base_compressor.top_n = top_k
+
         # Perform retrieval
-        results = compression_retriever.invoke(query)
+        results = retriever.invoke(query)
 
         if verbose:
             print_results(query, results)
@@ -351,6 +402,21 @@ def get_concatenated_results(query: str, top_k: int = 5, separator: str = "\n\n-
         return f"Error retrieving results: {str(e)}"
 
 
+# --- UTILITY FUNCTION FOR MANUAL INITIALIZATION ---
+
+def initialize_now():
+    """
+    Force immediate initialization of the vector store.
+    Useful for testing or pre-loading.
+    """
+    try:
+        get_vector_store()
+        print("✅ Vector store pre-loaded successfully")
+    except Exception as e:
+        print(f"❌ Failed to pre-load vector store: {e}")
+        raise
+
+
 # --- MAIN EXECUTION (for testing) ---
 
 def main():
@@ -383,4 +449,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()  
