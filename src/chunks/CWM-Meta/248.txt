@@ -1,0 +1,15 @@
+The edit tool then provides 
+agent-friendly feedback showing the surrounding code after the change. Python execution trace prediction. Figures B.23 and B.24 showcase Python execution trace prediction at 
+inference time and compare it to reasoning about program execution in natural language. For Figure B.23, a 
+Python list is modified while iterating over it. In execution trace prediction mode, the model tracks all list 
+modifications and predicts the output correctly. With natural language reasoning, the model fails to predict the 
+correct return value - even though it appears to recognize the list modification during reasoning. Conversely, 
+Figure B.24 presents an example requiring the evaluation of a complex Python statement. Execution trace 
+prediction fails to correctly predict the outcome of the statement in a single prediction step, but natural 
+language reasoning breaks down the complex statement into simpler expressions and then combines those into 
+a correct result. We believe that combining the groundedness of trace prediction with the flexibility of natural 
+language reasoning makes for interesting future research. Figure B.25 demonstrates how CWM's execution trace prediction capabilities allow it to function as a neural 
+Python debugger. We think that equipping CWM with debugging capabilities that are not available with 
+traditional debuggers, such as skipping loops in constant time, jumping to arbitrary lines of code, or predicting 
+inputs to reach arbitrary states is highly interesting future work. 42 
+<<<

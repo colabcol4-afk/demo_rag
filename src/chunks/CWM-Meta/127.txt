@@ -1,0 +1,9 @@
+Figure 14 Overview of how agents interact with RL environments to produce trajectories. trainers send updated model weights to the workers periodically. After a model update is received and applied 
+on a worker, the worker continues generation of partially completed trajectories using the old KV-cache. This approach ensures continuously high GPU utilization (see Figure 15) and has been used in our previous 
+work (Synnaeve et al., 2019; Gehring et al., 2025; Tang et al., 2025; Cohen et al., 2025) and notable RL 
+frameworks such as PipelineRL (Piche et al., 2025). Inference. We use our own throughput-optimized inference backend FastGen (Carbonneaux, 2025). FastGen 
+supports batched inference, CUDA graphs, paged attention (Kwon et al., 2023), chunked prefills, host-side KV- 
+cache, tensor parallelism, and CPU/GPU profiling. In batched inference, one generates tokens for each sequence 
+in a batch in parallel, continuing without synchronizing CUDA streams until a block of tokens (e.g., 32) is 
+completed. After each block, completed sequences are truncated at stop tokens and returned, and new sequences 
+are added to the batch so as to keep the batch size constant. For more details, see Carbonneaux (2025).

@@ -1,0 +1,3 @@
+GPT-oss use a custom subset of 477 problems, while CWM is evaluated on the full set of 500 problems.) 
+as Docker containers, referred to as executable repository images. These images contain a preconfigured envi- 
+ronment capable of running repository code and tests without additional setup.

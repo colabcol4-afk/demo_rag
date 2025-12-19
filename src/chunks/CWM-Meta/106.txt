@@ -1,0 +1,4 @@
+Every trajectory is classified as either correct (reward = 1) or incorrect (reward = - 1). Correctness 
+is defined as: 
+       Exactly one </think> tag, signaling successful reasoning completion. Exactly one $\boxed{}$ for the predicted answer. . Our verifier emits True for the comparison between the predicted answer and the ground-truth answer. Since there is no general normal form for mathematical expressions, the verifier checks whether the predicted 
+answer is equivalent to the ground truth answer using a variety of heuristics detailed in §G. Data sourcing and filtering.

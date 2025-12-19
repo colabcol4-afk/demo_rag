@@ -1,0 +1,7 @@
+No external LLM tokens were used beyond those 
+explicitly mentioned in these four contexts. 8.2   Code World Model Preparedness Report 
+Despite its relatively small size of 32 B parameters, CWM outperforms open-weight models at similar size and 
+is competitive to larger and proprietary models on verified software engineering benchmarks. To anticipate 
+risks from this release, including potentially novel risks, we conducted an automated assessment of CWM 
+capabilities relevant to the domains identified in our Frontier AI Framework17 that could present potentially 
+ 17 See https://ai.meta.com/static-resource/meta-frontier-ai-framework.

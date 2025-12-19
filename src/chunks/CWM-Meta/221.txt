@@ -1,0 +1,5 @@
+Ivan Moshkov, Darragh Hanley, Ivan Sorokin, Shubham Toshniwal, Christof Henkel, Benedikt Schifferer, Wei Du, and 
+  Igor Gitman. Aimo-2 winning solution: Building state-of-the-art mathematical reasoning models with openmathrea- 
+  soning dataset. arXiv preprint ar Xiv:2504.16891, 2025. Leonardo de Moura and Sebastian Ullrich. The lean 4 theorem prover and programming language. In André Platzer 
+  and Geoff Sutcliffe, editors, Automated Deduction - CADE 28, pages 625-635, Cham, 2021. Springer International 
+  Publishing. ISBN 978-3-030-79876-5.

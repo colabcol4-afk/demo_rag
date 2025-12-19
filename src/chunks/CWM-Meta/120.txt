@@ -1,0 +1,12 @@
+Additionally, we incorporate several optimizations towards efficient training. fp8 matrix multiplication. All linear layers in transformer blocks used float8 low-precision mode, similar to 
+Micikevicius et al. (2022), achieving twice the nominal FLOPs of bfloat16 on Hopper GPUs. (For RL training, 
+fp8 precision hurt performance and hence we used bfloat16 for linear layers in transformer blocks.) We used 
+dynamic "row-wise" scaling, also called "outer-vector", that is, operands were scaled along their reduction di- 
+mension. We used the e4m3 variant exclusively, and we disabled fast-accumulation throughout. The two matrix 
+multiplication operations for the gradient computation in the backwards pass use special setups: w. grad is com- 
+puted in bfloat16 (which increased accuracy and precluded the need to transpose its operands to satisfy float8 
+layout constraints, which make kernel fusion difficult); in. grad uses "tensor-wise" scaling for its weight operand, 
+i.e., a single scaling factor for the whole tensor, which again makes transposition more efficient. In practice, we 
+try to issue "unscaled" matrix multiplication kernels, introducing scaling in the kernel epilogue worsens perfor- 
+mance, and perform the scaling as a manual post-processing step, which can be fused into subsequent kernels. 20 
+<<<

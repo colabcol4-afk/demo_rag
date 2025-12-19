@@ -1,0 +1,18 @@
+27 
+<<<
+
+ Table 9 Detailed analysis of execution trace prediction with CWM and greedy decoding. We present a breakdown of 
+ the accuracy of the individual components of trace prediction for validation set inputs from CruxEval as well as our 
+ function-level data. The CruxEval pass@1 score here differs from the one in Table 8 (87.7%) due to greedy decoding. Overall, we find solid accuracy across state and action prediction. CruxEval   Function-level 
+                   Output     pass@1                            88.0            94.4 
+                   Trace      Valid Trace Format                99.6           100.0 
+                              State Exact Match                 96.9            96.4 
+                              Action Exact Match                96.5            98.0 
+                   States     Valid JSON Format                100.0           100.0 
+                              Key Match                         99.1            99.0 
+                              Key+Value Match                   98.1            97.9 
+                   Statistics Avg State Length (Token)          11.7            18.8 
+                              Avg Action Length (Token)         11.2            10.0 
+
+ Table 10 HaltEval-prelim pass@1 scores for different LLMs in different prompting settings. For reasoning we use 
+ temperature 0.6, top-p of 0.95, and 10 generations, while for direct and CoT predictions we use greedy decoding.

@@ -1,0 +1,7 @@
+6    Code and infrastructure 
+
+This section discusses details of our training pipeline, including efficiency-related features leveraged for CWM 
+training and the asynchronous RL architecture. 6.1   Techniques for efficient training 
+CWM is trained on H100s using a combination of Fully-Sharded Data Parallelism (FSDP) and Tensor Paral- 
+lelism (TP), see Table 3. We adopt FlashAttention-3 (Dao et al., 2022; Dao, 2024) to improve training speed 
+and reduce memory overhead.

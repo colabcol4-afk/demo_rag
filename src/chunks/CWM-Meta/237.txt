@@ -1,0 +1,6 @@
+John Yang, Carlos E Jimenez, Alexander Wettig, Kilian Lieret, Shunyu Yao, Karthik Narasimhan, and Ofir Press. Swe-agent: Agent-computer interfaces enable automated software engineering. Advances in Neural Information 
+  Processing Systems, 37:50528-50652, 2024. John Yang, Kilian Leret, Carlos E Jimenez, Alexander Wettig, Kabir Khandpur, Yanzhe Zhang, Binyuan Hui, Ofir 
+  Press, Ludwig Schmidt, and Diyi Yang. Swe-smith: Scaling data for software engineering agents. ar Xiv preprint 
+  ar Xiv:2504.21798, 2025b. Doron Yeverechyahu, Raveesh Mayya, and Gal Oestreicher-Singer. The impact of large language models on open-source 
+  innovation: Evidence from github copilot. arXiv preprint ar Xiv:2409.08379, 2024. Huaiyuan Ying, Zijian Wu, Yihan Geng, Zheng Yuan, Dahua Lin, and Kai Chen. Lean workbook: A large-scale lean 
+  problem set formalized from natural language math problems, 2025. https://arxiv.org/abs/2406.03847.

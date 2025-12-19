@@ -1,0 +1,3 @@
+BPE tokens are sorted by merge order where large 
+      id corresponds to rare tokens. Generating such tokens suggests that the model is generating at high 
+      entropy and over-weighing rare tokens.

@@ -1,0 +1,6 @@
+Figure 8 SWE RL interaction example. The agent interacts extensively with the repository sandbox through reasoning, 
+exploration, editing, and test execution, submitting a final patch using git diff along with a summary. The runtime implementation of the tools follows SWE-agent (Yang et al., 2024) and OpenHands (Wang et al., 
+2025), where bash is a stateful shell session running in a persistent server process, and serves as the main 
+component, while other customized tools are treated as plugins that can be "de-sugared" into simple bash 
+commands. For example, the edit and create tools are two standalone Python scripts, and the submit tool, 
+when used for file paths, reduces to cat <path> to retrieve the file content. The user prompt includes custom instructions for resolving software issues.

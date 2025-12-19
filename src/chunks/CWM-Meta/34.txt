@@ -1,0 +1,4 @@
+The definition says that between every pair of the same characters, there must be an even 
+ number of characters. So, for example, in "abba", each 'a' is at positions 0 and 3. The distance between them is 3-0 = 3, but the number of characters in between is 3-0-1 = 2, which is 
+ even. So that works. But in "aabba", the first two 'a's are at positions 0 and 1. The number of characters between them is 0, which is even. Let me double check. But the example says 
+ it's not correct.

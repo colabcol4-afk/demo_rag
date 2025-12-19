@@ -1,0 +1,16 @@
+Table 5 SWE-bench Verified resolve rates for alter- Table 6 Results on Aider Polyglot for CWM and baselines 
+native agentic harnesses are lower than the 53.9% from the official leaderboard. pass@1 achieved with our approach, but performance 
+remains reasonable across the board. Model                        Format     Pass 1@2 (%) 
+                                                     03-pro (high)                Diff       84.9 
+ Harness          Configuration Resolve Rate (%)     DeepSeek R1 (0528)           Diff       71.4 
+ Mini-SWE-Agent   250 turns               37.6       Qwen3 235B A22B diff, no think Diff     59.6 
+                                                                                  Diff       59.1 
+ OpenHands        40 turns                36.0       Kimi K2 
+                  128 turns                42.6      gpt-oss-120b (high)          Diff       41.8 
+                                                                                  Diff       40.0 
+                  500 turns                40.8      Qwen3-32B 
+                                                     Gemini 2.0 Pro exp-02-05     Whole File 35.6 
+                                                     CWM                          Whole File 35.1 
+ Ours (bash-only) 128 turns               42.1       Grok 3 Mini Beta (low)       Whole File 34.7 
+ Ours             128 turns               53.9       o1-mini-2024-09-12           Whole File 32.9 
+                                                     gpt-4.1-mini                 Diff       27.1

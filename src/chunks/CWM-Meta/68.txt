@@ -1,0 +1,17 @@
+(2024) show that models scale predictably for a fixed 
+model-to-data ratio and advocate for scaling laws that mirror the setting of the final pretraining run. Therefore, 
+we maintain a fixed model-to-data ratio of D/M = 40 across compute budgets, matching the target ratio of 
+our 32B parameter model pre-trained on 8 T tokens. This ratio is roughly 8 times more data than would be 
+compute optimal according to the Chinchilla paper (Hoffmann et al., 2022). We conduct a quasi-random search over batch size and learning rate across eight increasing compute scales, 
+ranging from 2 x 1018 to 2 × 1020 FLOP. For each scale, we keep the configurations within 1% of the best 
+
+                                                 11 
+<<<
+
+validation loss and fit the batch size BS and learning rate LR with respect to the compute budget C. Consistent with prior work, BS grows and LR declines gradually with C, while near-optimal hyper-parameters 
+span a broad range. However, likely due to our different pre-training data, our equations for learning rate and 
+batch size diverge from Bi et al. (2024): 
+
+                                       LR(C) = 19.29   C-0.177 
+                                                                                                   (2) 
+                                         BS(C) = 30.17 .

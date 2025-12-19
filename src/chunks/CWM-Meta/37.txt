@@ -1,0 +1,5 @@
+. Looking back, the code reads a string, passes it to the function. Let me create some test cases. Test 1: 'abba' -> expected YES -> the code should return YES. Test 2: 'aabba' -> expected NO -> because when it processes the third character, it's the third occurrence of 'a'. Wait for 'aabba' : 
+
+ Indices 0:a (occurs once) 
+
+ index1: a now (occurs twice. check 0 and 1 -> difference is 1 -> ??? But difference is -1 -> mod 2 is -1 % 2 = 1 (assuming C++ makes it positive 1). The code checks if even, no. So the code proceeds. Then loop reaches index 4 (a's third occurrence), which code detects count for a which is already 2 -> returns NO. So code should output NO here. Other test: 'aaa' (NO when processing third a). test4: 'abcd' -> YES (each character appears once or twice in non-same parity) -> code OK. ttest5: 'aabb' -> the two a's (index 0 and1 -> difference 1, ok). Two b's (index 2,3 difference -> 1 is ok). Code returns YES.

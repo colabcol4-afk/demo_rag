@@ -1,0 +1,5 @@
+Prior work empirically shows this approach is beneficial in improving general code generation 
+ and understanding capabilities (Armengol-Estapé et al., 2025; Zhang et al.). Neural code interpretation 
+further has the potential to go beyond traditional interpreters, with applications such as tracing through 
+unexecutable code or combining it with reasoning capabilities. Next, we describe the different sources from 
+which we gather execution trace data.

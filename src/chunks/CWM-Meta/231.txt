@@ -1,0 +1,5 @@
+Alon Talmor, Jonathan Herzig, Nicholas Lourie, and Jonathan Berant. Commonsenseqa: A question answering 
+  challenge targeting commonsense knowledge. In Jill Burstein, Christy Doran, and Thamar Solorio, editors, 
+  Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: 
+  Human Language Technologies, NAACL-HLT 2019, Minneapolis, MN, USA, June 2-7, 2019, Volume 1 (Long and 
+  Short Papers), pages 4149-4158. Association for Computational Linguistics, 2019. doi: 10.18653/V1/N19-1421. https://doi.org/10.18653/v1/n19-1421.

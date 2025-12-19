@@ -1,0 +1,1 @@
+Your response should be solely the assertion, enclosed within [ANSWER] and [/ANSWER] tags. You are a computational world model and can predict the program execution.

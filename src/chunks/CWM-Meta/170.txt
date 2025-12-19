@@ -1,0 +1,7 @@
+Performance is evaluated by the proportion of 
+files for which the model reproduces the target version exactly. We compare CWM to DeepSeek-R1 0528, 
+Claude Sonnet 4 (Anthropic, 2025), Gemini 2.5 Pro 06-05 (Comanici et al., 2025), Kimi K2, GPT-5, and 
+gpt-oss-120B. Qwen3-32B is not on the leaderboard and has a shorter native context length. For LoCoDiff, the results in Figure 18b show that, while all models suffer a degradation in performance as the 
+sequence length increases, CWM provides better performance than DeepSeek-R1 0528 and gpt-oss-120B and 
+is competitive with large scale commercial models (e.g., GPT-5 and Gemini 2.5 Pro) on both short and long 
+sequences, with a significant gap to Claude Sonnet 4 only. We present results for RULER in §J.

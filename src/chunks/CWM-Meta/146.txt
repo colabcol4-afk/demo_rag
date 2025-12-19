@@ -1,0 +1,3 @@
+harness when limiting tool use to bash commands only. As Table 5 shows, although resolve rates degrade when 
+using different agents, tool implementations, or limiting tool choices, CWM provides robust and reasonable 
+performance across all setups.

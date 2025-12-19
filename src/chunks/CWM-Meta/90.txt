@@ -1,0 +1,8 @@
+Reward. We adopt a hybrid reward for SWE RL. When all the hidden tests pass, the reward is 1. If not, we 
+adopt the patch similarity reward used in the SWE-RL paper (Wei et al., 2025). Unlike the SWE-RL paper, 
+which uses a continuous reward value, we apply a discrete and threshold-based design to improve the training 
+stability by avoiding rewarding low-similarity patches. In detail, when the computed similarity is above the 
+threshold of 0.5, the reward is 0, otherwise, the reward is -1. This reward shaping showed benefits in early 
+ablation, because a higher patch similarity incentivizes the model to localize the actual bugs more precisely 
+and to produce a closer fix to the oracle patch. This also helps the model to gain more learning signals from 
+difficult issues for which it cannot produce any test-passing patch.

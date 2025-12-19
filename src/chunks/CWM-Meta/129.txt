@@ -1,0 +1,4 @@
+Each worker then individually applies the new weights. The trainers are only involved in the first stage, which minimizes the amount of time model transfer takes on 
+the trainers. On the workers, the first and second stages both occur entirely in CPU memory, which allows 
+them to overlap with generations. The third stage is simply a CPU to GPU memory copy, so it is reasonably 
+fast. When TP is enabled, this process occurs individually for each data-parallel group.

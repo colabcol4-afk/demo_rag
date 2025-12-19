@@ -1,0 +1,5 @@
+Jiayi Pan, Xingyao Wang, Graham Neubig, Navdeep Jaitly, Heng Ji, Alane Suhr, and Yizhe Zhang. Training software 
+  engineering agents and verifiers with swe-gym. In Proceedings of the 42nd International Conference on Machine 
+  Learning (ICML 2025), 2025. https://arxiv.org/abs/2412.21139. arXiv:2412.21139, accepted at ICML 2025. Alex Piche, Rafael Pardinas, Ehsan Kamalloo, and Dzmitry Bahdanau. Pipeline RL: fast LLM agent training, 2025. https://huggingface.co/blog/ServiceNow/pipelinerl. Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever. Improving language understanding by generative 
+  pre-training. Technical report, OpenAI, 2018. https: //cdn. openai.com/research-covers/language-unsupervised/ 
+  language_understanding_paper . pdf.

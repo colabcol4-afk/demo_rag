@@ -1,0 +1,3 @@
+to the prompt. After reasoning in natural language about the code, the model uses its execution trace prediction 
+
+capability to confirm the correct return value {1:                                2,   2:   4}. We encode all special                          (e.g.

@@ -1,0 +1,14 @@
+In Figure 16, we report results for best@k for k = 16, which achieves a 65.8% resolve rate. As a simple 
+alternative to best@k, we found that majority voting (Wang et al., 2022b) of candidate patches, based on exact 
+string matching and without any test generation or execution, leads to a pass rate of 58.4%. In Figure 17a, 
+we report best@k and pass@k across different values of k. As expected, pass@k improves monotonically with 
+larger k, ultimately reaching a success rate of 80.4% at k = 40. For best@k, performance improves sharply 
+from k = 2 before plateauing around k = 16. For majority-voting, performance improves gradually from k = 2 
+and plateaus at k = 24. Alternative harnesses for SWE-bench Verified. To better understand the robustness of CWM to the choice of 
+evaluation harness and tool-calling implementations, we perform experiments with third-party approaches, 
+namely Mini-SWE-Agent (Yang et al., 2024) and OpenHands (Wang et al., 2025). For both, we shortened 
+and adapt the system prompt to better align with the SWE RL prompt (see Figure 11) and make sure to 
+keep reasoning output as part of the message history. We configure both harnesses to use OpenAI function 
+calling, which sends messages along with structured tool descriptions. When prompting the model, we format 
+and append the available tools to the system prompt. When the model decides to call a tool, the call is 
+parsed and returned in a tool_calls field in our response.

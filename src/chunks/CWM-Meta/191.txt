@@ -1,0 +1,8 @@
+Xiao Bi, Deli Chen, Guanting Chen, Shanhuang Chen, Damai Dai, Chengqi Deng, Honghui Ding, Kai Dong, Qiushi Du, 
+  Zhe Fu, et al. Deepseek Ilm: Scaling open-source language models with longtermism. ar Xiv preprint ar Xiv:2401.02954, 
+  2024. Alexander Bick, Adam Blandin, and David J Deming. The rapid adoption of generative ai. Technical report, National 
+  Bureau of Economic Research, 2024. Yonatan Bisk, Rowan Zellers, Ronan Le Bras, Jianfeng Gao, and Yejin Choi. PIQA: reasoning about physical 
+  commonsense in natural language. In The Thirty-Fourth AAAI Conference on Artificial Intelligence, AAAI 
+  2020, The Thirty-Second Innovative Applications of Artificial Intelligence Conference, IAAI 2020, The Tenth AAAI 
+  Symposium on Educational Advances in Artificial Intelligence, EAAI 2020, New York, NY, USA, February 7-12, 2020, 
+  pages 7432-7439.

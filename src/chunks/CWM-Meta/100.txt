@@ -1,0 +1,3 @@
+We assign a reward of -1 for incorrect trajectories and 1 for correct ones. A trajectory is correct if it 
+ meets all of the following criteria: 
+    · Contains exactly one </think> tag, signaling successful reasoning completion. · Contains exactly one markdown block in the model's generated answer.

@@ -1,0 +1,7 @@
+Different workers may not update their weights at the same time: the system waits for 
+each worker to signal readiness before sending new weights to avoid memory overload. Docker execution services or Modal (Modal Team)), implementation of remote execution servers and clients 
+as an interface to a persistent shell session, plugins that can be defined as standalone Python scripts invoked 
+through bash, along with evaluation infrastructure for reward calculation or benchmarking. 7    Experimental results 
+
+We begin this section by analyzing the impact of incorporating CWM data during mid-training for a small- 
+scale ablation.

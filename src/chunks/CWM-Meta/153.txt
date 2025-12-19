@@ -1,0 +1,12 @@
+Follow previous paragraph, we present a detailed evaluation of the quality 
+of the execution traces predicted by CWM for validation sets of CruxEval and our function-level data. Concretely, we measure the fraction of generated traces that follow our format (Valid Trace Format) and the 
+observation (action) exact match accuracy (Observation (Action) Exact Match), which measures the number 
+of observations (actions) exactly matching ground truth relative to the total number of observations (actions) 
+per execution trace. Our trace format specifies the state as a JSON dump of a dictionary containing the local 
+variables. We report the fraction of state predictions matching this format (Valid JSON Format). Additionally, 
+Key (+Value) Match measures the average fraction of matching keys (and values) per state prediction. The results in Table 9 show that CWM adheres to the correct trace and observation format for all data 
+sources, achieving more than 99 % format matching across the board. CWM is able to accurately predict the 
+execution trace as well as intermediate observations and actions, which is reflected in scores larger than 96 % 
+for Observation/Action Exact Match and larger than 97% in Key (+Value) Match. 7.4   Program termination prediction 
+The question of whether a program terminates is a reasoning problem which goes beyond what can be shown 
+by considering individual finite traces as in CWM training: non-termination cannot be observed by executing

@@ -1,0 +1,4 @@
+This method stopped any increasing gibberish generation and 
+      performed better than detectors based on logprob and position alone. 5We recommend using the k2 estimator (Schulman, 2020) whose gradient is an unbiased estimator of the forward KL(Te, Told), 
+rather than the k3 estimator used by GRPO whose gradient is an unbiased estimator of the reverse KL(Told, Te). 13 
+<<<

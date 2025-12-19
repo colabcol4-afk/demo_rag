@@ -1,0 +1,12 @@
+CWM-specific data makes up 30% of the overall mid-training datamix. We further increase the fraction 
+of general code data to 40 % and keep 30 % for rehearsal of the initial pre-training datamix, as this proved 
+essential in retaining performance on standard evaluations. Within the rehearsal fraction, we now upweight 
+higher quality datasets such as those containing math or long context data, while making sure to avoid 
+over-epoching. We summarize the types of data used across CWM training stages in Figure 6b. Mid-training datamix ablations. For many of the datasets introduced during mid-training we can afford to train 
+for multiple epochs. To determine the desired number of epochs per dataset, we perform a series of scaling law 
+experiments (Kaplan et al., 2020) that simulate different levels of epoching (Dubey et al., 2024). In agreement 
+with the literature on this (Muennighoff et al., 2023), we generally find that multi-epoch training improves 
+downstream task performance, albeit at diminishing returns, before eventually leading to overfitting. By 
+selecting target epochs such that metrics indicate little to no diminishing returns, we arrive at between 1 and 
+4 target epochs per dataset. The final proportion of a dataset in the mid-training mix is then calculated such 
+that the desired number of epochs is reached at the end of mid-training. When estimating the number of steps

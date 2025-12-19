@@ -1,0 +1,10 @@
+Multi-lingual coding. The Aider Polyglot benchmark (Aider Team, 2025) measures coding ability across a diverse 
+set of programming languages using challenging exercises from Exercism.11 The primary metric is the pass 
+rate on the second attempt, allowing the model to iterate on test failures once. We make a few changes to the 
+harness to align it with the CWM training distribution, such as removing hard-coded assistant messages from 
+the history, concatenating adjacent messages of the same role, removing examples from the system prompt, 
+turning off auto-linting and stripping of reasoning traces, and reiterating in the prompt that exact matches 
+are needed. We evaluate with reasoning, at temperature 0.4, and without test-time-scaling. Although Aider 
+Polyglot may not fully qualify as a truly agentic benchmark - given its lack of dynamic tool use beyond code 
+execution and limited interaction - we include it here in light of the self-correction capabilities that it allows for. As shown in Table 6, CWM achieves 35.1% accuracy, comparable to other models in its class such as 
+Qwen3-32B (40.0%) and other models using the "whole file" edit format such as Gemini 2.0 Pro (35.6%).

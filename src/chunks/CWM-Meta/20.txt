@@ -1,0 +1,13 @@
+Function-level tracing. We collect a dataset of Python functions from online sources and automatically generate 
+input-output pairs with a combination of fuzzing and prompting Llama3-70B-Instruct. Our tracing process 
+ captures the state of the Python program (interpreter stack frames) at different intermediate execution points, 
+ corresponding to events of the Python interpreter (e.g., executed lines, return statements, exceptions). The 
+final dataset contains over 120 M traced Python functions. We post-process the raw traces to construct observation-action pairs. The observation contains local variables 
+and stack frame metadata immediately prior to executing a line of code, the action is the specific Python line 
+being executed, and the subsequent observation captures the resulting local variable states and additional 
+event metadata such as return statements; we disregard global variables and external side effects. The variable 
+values that do not change with respect to the previous step are summarized with an ellipsis. We prefix the 
+trace data with the source code context. Figure 3 illustrates the CWM format for Python traces. Given a Python code context and a marker of 
+the tracing initial point, the model follows with a series of Python stack frame predictions (in the form of 
+ a JSON-formatted dictionary with the local variables) and the corresponding actions (i.e., the part of the 
+code that is being executed). The frame, action, and argument separators, as well as the trace context start

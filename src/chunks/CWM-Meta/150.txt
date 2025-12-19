@@ -1,0 +1,16 @@
+Table 7 Results on Terminal-Bench for CWM and base- Table 8 Execution trace prediction is competitive with 
+lines from the official leaderboard. reasoning for CruxEval-output pass@1 scores. For CWM, 
+                                                   we use temperature 0.6, top-p 0.95, and 10 generations, 
+  Model             Agent          Accuracy (%)    while for CWM SFT we use greedy decoding. OpenAI-Multiple   OB-1           59.0 
+                                                     Budget   Mode                CWM SFT    CWM 
+  GPT-5             OB-1           49.0 
+  GPT-5             Terminus 1     30.0                       Language w/o COT         67.8   66.6 
+                                                       small 
+  04-mini           Goose          27.5                       Trace Step               59.1   58.1 
+  CWM               Terminus 1     26.3 
+                                                              Language w/ CoT          83.3 94.3 
+  Gemini 2.5 Pro    Terminus 1     25.3                large Trace Full               87.3    87.7 
+  04-mini           Terminus 1     18.5 
+  Grok 3 Beta       Terminus 1     17.5 
+  Gemini 2.5 Flash Terminus 1      16.8 
+  Qwen3-32B         TerminalAgent 15.5

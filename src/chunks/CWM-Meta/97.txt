@@ -1,0 +1,7 @@
+Design. RL for competitive programming aims to teach the model to write correct programs for challenging 
+tasks and to reason about code and algorithms. Our competitive programming environment presents the 
+problem to the agent in the first turn and optionally allows follow-up attempts, during which the environment 
+provides execution feedback. It supports multiple programming languages and provides detailed feedback on 
+syntax errors, timeouts, and incorrect test outputs. The environment terminates either when the maximum 
+number of turns is reached or when the agent produces a correct solution. In the joint RL run, we limit the 
+number of attempts to one but allow up to 64 K tokens in responses to enable extensive reasoning. We adapt a lightweight prompt template which is shown in Figure 10.

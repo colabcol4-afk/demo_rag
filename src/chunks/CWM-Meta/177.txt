@@ -1,0 +1,10 @@
+As part of ongoing work to improve the 
+robustness of our evaluations and the reliability of our models, we also include a preliminary propensity 
+evaluation, with plans to expand this area in future assessments. We performed this assessment by testing the relative performance of CWM against a set popular and capable 
+open-source models that represent a baseline of capabilities available in the open ecosystem: Qwen3-Coder-480B- 
+A35B-Instruct (Yang et al., 2025a), Llama 4 Maverick (Meta AI, 2025), and gpt-oss-120B (OpenAI, 2025a). Based on the results of these assessments, we believe that the open-source release of CWM is unlikely to 
+meaningfully increase risks related to Cybersecurity or Chemical & Biological threats beyond the current 
+ecosystem baseline. Additionally, our preliminary evaluations suggest that CWM shows undesirable propensi- 
+ties at rates comparable to most open-source models though some models achieve substantially lower rates, 
+i.e., gpt-oss-120B. These results indicate that CWM is within the "moderate" risk threshold for the catastrophic domains defined 
+in Meta's Frontier AI Framework.17 We share the details in the Code World Model Preparedness Report. 18

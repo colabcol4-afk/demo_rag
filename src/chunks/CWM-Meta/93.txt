@@ -1,0 +1,8 @@
+So the steps are: ... < /think> 
+                                                                                                    Reasoning 
+      High-quality reasoning agent traces    <tool: bash> 
+                                             grep -n "_Keys(" hydra/_internal/instantiate/_instantiate2.py 
+                                             </tool>                                                   Tool call 
+
+Figure 9 SWE RL self-bootstrapping. Starting from a pre-RL checkpoint, we iteratively perform RL, rejection-sample 
+high-quality reasoning traces, and feed them back into SFT.

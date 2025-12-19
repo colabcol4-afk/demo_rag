@@ -1,0 +1,11 @@
+C0.231 
+
+See SE for additional details. 5   Post-training: SFT, RL algorithms and environments 
+
+Our post-training phase improves CWM's ability to solve complex programming-related problems with 
+reasoning, building on the internal code world model learned during earlier training stages. Concretely, 
+we first perform supervised finetuning (SFT) to improve both reasoning and general instruction-following 
+ capabilities. We then carry out large-scale multi-task multi-turn reinforcement learning on coding contests, 
+math questions, and software engineering environments. We describe the SFT stage, our RL algorithms, data 
+and environments, and detail our joint RL training recipe. As we do not intend to develop a general-purpose 
+chatbot we therefore deliberately omit an RLHF stage.

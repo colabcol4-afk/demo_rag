@@ -1,0 +1,8 @@
+Table 4 Our ablation study reveals a positive impact on performance from introducing GitHub PR trajectory, Python 
+execution tracing, and ForagerAgent data during mid-training. We report results for CruxEval-output, CruxEval-input, 
+NLLs on oracle SWE-bench Verified (SBV) trajectories, NLLs on agentic SBV trajectories, and SBV pass@1 scores. All results are for 8 B models, jointly pre-trained for 6 T tokens followed by 1 T tokens of mid-training ablation, with 
+SBV pass@1 reported after an additional SFT phase. PRs   Tracing   Forager CruxEval-O1     CruxEval-It Oracle SBV NLLĮ    Agentic SBV NLL (32k)|   SBV1 
+   [X]     [X]       [X]           45.4         44.1               0.64                    0.39     14.6 
+   [X]     [X]       [X]           44.6         45.8              0.55                     0.37     18.6 
+   [X]     [X]       [X]           73.9         51.5              0.54                     0.38     18.4 
+   [X]     [X]       [X]           74.5         54.8              0.54                     0.29    22.1

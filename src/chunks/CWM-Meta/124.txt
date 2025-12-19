@@ -1,0 +1,9 @@
+As shown in Figure 14, a rollout consists of a sequence of iterative agent-environment interactions. Each environment implements two methods: 
+    · start: start a new episode by producing an initial state and an observation (prompt) based on a sample 
+     from the dataset. The state encapsulates the contents of the hidden environment along with any specific 
+     resources corresponding to the current episode. · step: takes an action (sequence of tokens) leading to a state transition. The new observation includes 
+     all information visible to the agent and necessary during training or inference, such as the latest action, 
+     observation, and reward. All interactions between the agent and the environment are token-based. In addition, the environment can 
+suggest context switches to erase past history or restart from scratch, allowing multi-context trajectories. Our 
+environments adhere to a common trajectory format, which prescribes that a trajectory consists of a sequence 
+of messages, whose format is detailed in §H.

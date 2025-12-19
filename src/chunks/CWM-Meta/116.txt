@@ -1,0 +1,7 @@
+Figure 13 Length reward scheduling for RL training. The decaying threshold starts at 8 k at the start of training and 
+linearly increases to its 64 k limit over 10 000 steps. such as (0.1,0.2] and (0.6,0.7], and sample harder examples more frequently using weights inversely 
+     proportional to the interval's midpoint. Hyperparameters. After an initial linear warmup over 100 steps, we employ a learning rates of 2.5 x 10-7 
+throughout training. The maximum batch size for each gradient step is 8.4 M tokens during the first stage 
+and 16.8 M tokens for the second stage. Gradients are clipped to norm 0.1. We use G = 8 rollouts per data 
+point, and new model weights are broadcast to workers after 4 gradient steps. We list further GRPO-specific 
+hyperparameters in §5.2.

@@ -1,0 +1,17 @@
+(a)                                                  (b) 
+
+Figure 18 (a) Test-time scaling on AIME24 with majority voting and short-3@k. See main text for details.(b) LoCoDiff 
+results for CWM and baselines considering different sequence lengths buckets. 8   Transparency, Risks & Limitations 
+
+8.1 Transparency on external models and data 
+As mentioned previously in the relevant sections, we use data from external LLMs in four contexts: (i) 
+ForagerAgent, (ii) trace-to-natural language conversion, (iii) function tracing, and (iv) the SFT phase. For 
+the ForagerAgent, we employ Llama3-70B-Instruct (Dubey et al., 2024) and Qwen3-235B-A22B (without 
+thinking) (Yang et al., 2025a) as base models to interact with the computational environment. For converting 
+raw Python traces into natural language, we use Qwen3-32B-FP8 (without thinking) (Yang et al., 2025a). For 
+function tracing, we use Llama3-70B-Instruct to generate Python function inputs and to generate solutions 
+for CodeContests data. Finally, during SFT, we incorporate trajectories from DeepSeek-R1 (Guo et al., 2025) 
+through the OpenMathReasoning (Moshkov et al., 2025) and OpenCodeReasoning (Ahmad et al., 2025) 
+datasets. We used mitigated versions of the OpenCodeReasoning and OpenMathReasoning datasets, where 
+mitigations included algorithmic bias filtering and cybersecurity protections. We applied similar mitigations 
+when using Qwen3-32B-FP8 to generate data for training.

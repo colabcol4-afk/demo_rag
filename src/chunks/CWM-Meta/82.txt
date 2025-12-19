@@ -1,0 +1,9 @@
+single terminal reward signal per rollout. In the remainder of this section, we describe the specification of 
+environment, i.e., prompt and observation design, reward function, and the corresponding datasets. During reasoning RL, we discontinue the use of SFT reasoning tokens and replace them with clear-text <think> 
+</think> tags. Early RL experiments on top of the SFT model showed long initial reasoning traces and slow 
+improvements. We attribute this to our SFT reasoning data, which enhances reasoning performance but limits 
+exploration during RL training. Switching out reasoning tags resulted in shorter responses, higher starting 
+entropies, and significantly improved final performance. This suggests our approach leads to a best-of-both 
+worlds scenario: the model's familiarity with reasoning responses from SFT enables rapid improvements early 
+on in RL, while the introduction of the new tokens allows the model to develop its own reasoning that is 
+guided - but not restricted - by the SFT data. 5.3.1 Agentic SWE

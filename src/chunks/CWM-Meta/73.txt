@@ -1,0 +1,12 @@
+12 
+<<<
+
+ a number of these and include further changes to support multi-turn RL and efficient asynchronous RL. A 
+formal description of our RL algorithm can be found in §C. Differences from GRPO. We deviate from the original GRPO algorithm in the following ways: 
+    · Multi-turn: GRPO was originally developed for single turn (prompt -> response) environments. Instead, 
+      we use a multi-turn variant where the sequence contains both model- and environment-generated tokens 
+      after the prompt, resulting in the need for masking via Mi,t. Furthermore, whereas GRPO used the 
+      reward ri, we use the return Ri (sum of rewards) in the advantage calculation. · Asynchronous: Whereas GRPO uses a synchronous setup, where nodes switch between generating batches 
+      of completions and training on them, we use asynchronous RL, resulting in much higher throughput. . No o normalization: GRPO calculates the advantage as the centered and scaled terminal reward 
+      Â¡ = (ri-u)/o, where     and o are mean and standard deviation of rewards in the batch. This introduces 
+      a difficulty bias (Liu et al., 2025), which we avoid by using the more conventional   = (Ri - p).

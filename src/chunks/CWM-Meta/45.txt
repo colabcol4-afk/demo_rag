@@ -1,0 +1,2 @@
+For each code execution step: 
+ - Begin with <|frame_sep|> followed by the event token which can be <|call_sep|>, <|line_sep|>, <|return_sep|> or <|exception_sep|>. - After <|call_sep|> or <|line_sep|> put the local variable states as dictionary in JSON format followed by the <|action_sep|> token and the current source code line. - After <|return_sep|>, <|exception_sep|> directly put the <|action_sep|> token and the current source code line followed by an <|arg_sep|> token and the return or exception arguments.

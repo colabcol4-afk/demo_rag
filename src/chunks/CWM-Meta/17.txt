@@ -1,0 +1,22 @@
+Running 
+both RepoAgent and Activ methods in parallel, we created over 35 k unique executable repository images. 2.2      Python tracing: neural code interpretation data 
+The first type of CWM data we present is memory tracing of Python programs. This involves gathering 
+executable functions or executable repository images, and running them using different IO pairs or CI tests, 
+while capturing the state of the memory, chiefly the local variables, after each line is executed. This process 
+
+                                                                      3 
+<<<
+
+                                            <|trace_context_start|> 
+                def count(s, t): 
+                   n = 0 
+                   for c in s: 
+                     n += int (c == t) 
+                   return n 
+
+                count("strawberry", "r") # << START_OF_TRACE 
+
+                                               <|frame_sep|> 
+              <|call_sep|> {"s": "'strawberry'", "t": "'r'"} <|action_sep|> def count(s, t): 
+                                               <|frame_sep|> 
+              <|line_sep|> {"s": ". .

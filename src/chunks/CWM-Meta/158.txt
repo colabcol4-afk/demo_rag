@@ -1,0 +1,12 @@
+We query LLMs to judge whether a program terminates (answer #T) or diverges (answer f(n) where n leads 
+ to divergence, followed by the comment #NT). We reward a divergence claim if f (n) times out after 5 seconds. If, however, the model predicts #NT, and the ground truth is #T, it is not rewarded, even if execution exceeds 
+ the timeout. For instance, if f's ground truth is #T and f(42) runs for 7.5 million years and then terminates, 
+ our scoring (pass@1) will not reward a #NT claim for f(42) even though it trips timeout. Our use of timeout 
+ as a proxy for divergence is similar to Alon and David (2022) in judging correct non-termination claims, but 
+ different in that timeout is not used as a ground truth for termination claims. This results in an eval that is 
+ conservative in the sense that it awards scores that could be higher than that given by a perfect oracle, but 
+ never lower. It would be worth exploring replacing the ground truths and input validation by logical proofs of 
+ termination and non-termination (Cook et al., 2011; Gupta et al., 2008). Table 10 reports results for CWM, Qwen3-32B, and Llama3-70B with direct prediction, prompted chain-of- 
+ thought (CoT), and reasoning (for CWM and Qwen3-32B only). "Reasoning" here means use of the <think> 
+ ... < /think> format from RL. We report CoT prompting numbers to represent an attempt to approximate 
+ reasoning that is compatible with Llama3-70B. As a reference, we also provide the scores of a constant classifier

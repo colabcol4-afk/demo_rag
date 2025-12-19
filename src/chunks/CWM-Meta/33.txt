@@ -1,0 +1,6 @@
+We show early examples of this in Figures B.26 and B.27. This method of reasoning-via- 
+tracing for program generation is reminiscent of work by Hoare (1971); Dijkstra (1976) on using logical reasoning 
+about program execution to guide development rather than only using it to confirm correctness post-hoc. 6 
+<<<
+
+ Okay, I need to solve this problem where I have to check if a given string is evenly separated.

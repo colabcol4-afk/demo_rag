@@ -1,0 +1,15 @@
+Each SWE RL 
+trajectory has a single human user turn (besides the system prompt) containing the issue description and 
+multiple turns of agent-environment interactions. During training, we allow long-horizon interaction, with a 
+maximum of 128 turns over a context window of 131 k tokens. As shown in Figure 7, the agent is equipped with four tools to solve a given task (e.g., software issue), where 
+we embrace a minimal tool design centered on bash and editing, inspired by Sonnet 3.5 (Anthropic, 2025): 
+    · bash: executing commands in a stateful shell session, 
+    · edit: modifying an existing file using the search/replace format used by Agentless (Xia et al., 2024) 
+      and Aider (Aider Team, 2025), 
+    · create: creating a new file in the sandbox, and 
+      submit: marking something (e.g., a file path) as the final submission according to the task requirement. 14 
+<<<
+
+ Solve the following issue by implementing the necessary code changes and submitting a patch file: 
+ <issue_description> {issue} </issue_description> 
+ The [result] argument of <tool: submit> should be the path to a patch file that resolves the issue ...

@@ -1,0 +1,2 @@
+Kunhao Zheng, Jesse Michael Han, and Stanislas Polu. Minif2f: a cross-system benchmark for formal olympiad-level 
+  mathematics, 2022. https://arxiv.org/abs/2109.00110.

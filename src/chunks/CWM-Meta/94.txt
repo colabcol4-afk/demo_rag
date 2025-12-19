@@ -1,0 +1,11 @@
+This process improves data quality and format adherence 
+across iterations, raising success rates, and providing stronger initialization for joint RL. Then, iteratively, we start RL with the new SFT-ed model and collect higher-quality traces for the next 
+round. Eventually, we include the final set of the traces into the joint SFT mix to prepare for the final joint 
+RL. This results in the final CWM SFT model. For each iteration, we redo SFT on the original midtraining 
+checkpoint and discard old trajectories. Importantly, we find that the bootstrapped data greatly improve the 
+performance of the SFT checkpoint on SWE-bench Verified. Without SWE RL traces, the SFT model hardly 
+resolves any issues due to format errors. With more iterations of bootstrapping, the data quality improves 
+significantly, and the success rate increases from 30%, to 37%, and to 43% pass@1 over SWE-bench Verified. During earlier iterations, we record the offline pass rate for each instance and use it as the GRPO baseline in 
+later iterations. This lets us set the group size to 1 and speed up each epoch. We find this technique leads to 
+faster SWE RL training. In the final joint RL, we still perform online estimation of the GRPO baseline for 
+consistency with other environments and for a higher performance ceiling. Data sourcing and filtering.

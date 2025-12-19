@@ -1,0 +1,4 @@
+Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B Brown, Benjamin Chess, Rewon Child, Scott Gray, Alec 
+  Radford, Jeffrey Wu, and Dario Amodei. Scaling laws for neural language models. ar Xiv preprint ar Xiv:2001.08361, 
+  2020. Kimi Team, Yifan Bai, Yiping Bao, Guanduo Chen, Jiahao Chen, Ningxin Chen, Ruijue Chen, Yanru Chen, Yuankun 
+  Chen, Yutian Chen, et al. Kimi k2: Open agentic intelligence. ar Xiv preprint arXiv:2507.20534, 2025.

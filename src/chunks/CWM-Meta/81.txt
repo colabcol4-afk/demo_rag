@@ -1,0 +1,11 @@
+Figure 7 SWE RL design. An agent solves software engineering tasks end-to-end through long-horizon agent-environment 
+interactions via reasoning and tool use (up to 128 turns and 131 k context size). SWE RL employs a minimal toolset: 
+bash as the core, with edit, create, and submit as lightweight bash plugins. The reward combines hidden test outcomes 
+with patch similarity, where the similarity reward is applied when tests fail to provide auxiliary learning signals. 5.3    RL environments & data 
+We consider four types of RL tasks: Agentic software engineering (SWE) (§5.3.1), Coding (§5.3.2), Agentic 
+coding (§5.3.3), and Mathematics (§5.3.4). Each RL task is defined by a dataset (containing prompts, a 
+verification suite like unit tests, and additional metadata) and an environment that the agent interacts with. We integrate these tasks into a joint RL training phase which we detail in §5.4. We further refer to §6.2 for 
+implementation details regarding our environments and RL training infrastructure. Our environments constitute partially observable Markov decision processes: a language model is employed 
+as an agent, producing actions based on the preceding sequence of action-observation pairs and an initial 
+prompt. All environments for training CWM utilize software-based verification of outcomes, producing a 
+single terminal reward signal per rollout. In the remainder of this section, we describe the specification of

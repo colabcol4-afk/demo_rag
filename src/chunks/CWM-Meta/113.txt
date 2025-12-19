@@ -1,0 +1,14 @@
+We split our joint RL training into three distinct stages. Between stages, we adapt the 
+task distribution and employ custom reward shaping techniques. Stage 1 - Reasoning format bootstrapping: In the initial training stage, we soft-control the length of 
+     generations in math and coding tasks with an action length reward schedule. For the 40% of tasks 
+     related to competitive programming, we evenly sample from four environments: code Python, code 
+     C++, agentic coding Python, and agentic coding C++ (10% each). For a subset of SWE tasks identified 
+     as challenging, we include a hint in the prompts and downsample their occurence (4% of overall tasks; 
+     §5.3.1). · Stage 2 - Increasing task diversity and data resampling: After 14125 gradient steps, we increase the 
+     proportion of competitive programming tasks in the datamix to 50% and reduce the fraction of SWE 
+     tasks to 30%. We also include additional environment variations for each task. Specifically, we add Rust, 
+     Go, Java, and JavaScript versions of the code environment, which, together with Python and C++, now 
+     constitute 25 % of the datamix. The other half of the competitive programming tasks use the agentic 
+     coding environment, to which we do not add new languages. For the SWE data, we disable plugins with 
+     a 50% chance, such that file edits require standard terminal commands. We further remove hints from 
+     the challenging SWE subset and oversample it in a 4 : 1 ratio when plugins are used, and reverse this

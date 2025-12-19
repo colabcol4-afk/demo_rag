@@ -1,0 +1,11 @@
+langgraph>=1.0.0
+langchain-openai>=0.1.22
+langchain-groq
+langchain>=0.2.14
+langchain-fireworks>=0.1.7
+python-dotenv>=1.0.1
+httpx>=0.24.0
+
+[dev]
+mypy>=1.11.1
+ruff>=0.6.1

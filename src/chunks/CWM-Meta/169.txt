@@ -1,0 +1,9 @@
+compare to models with similar parameter counts, such as Qwen3-32B or Gemma-3-27B, as baselines, and 
+we use greedy generation instead of sampling at non-zero temperature. The results in Table 13 show that 
+CWM typically performs better than Gemma-3-27B, similar to Qwen2.5-32B, but worse than Qwen3-32B. An 
+interesting exception to this is CruxEval-O (Gu et al., 2024), where the introduction of the tracing data (see 
+§2.2) likely helps CWM gain an advantage. Note that we achieve even better results on CruxEval-Output 
+when using reasoning (see §7.3). Next, we consider two long-context evaluation benchmarks: LoCoDiff (Mentat AI Team, 2025) and RULER 
+(Hsieh et al., 2024). In LoCoDiff, models are provided with the commit history of a specific file and asked to 
+construct its final version. To succeed, models must follow the files' evolution - from the initial commit, through 
+diffs on multiple branches, to the resolution of merge conflicts.

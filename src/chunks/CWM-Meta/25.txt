@@ -1,0 +1,8 @@
+Natural language tracing. Lastly, we generate a dataset of step-by-step descriptions of Python code execution in 
+natural language rather than our strict JSON-like format from before. Natural language explanations of code 
+execution are closer in domain to other LLM tasks, which we hope will simplify knowledge transfer to other 
+ context such as reasoning in code generation. This less-structured format also has other advantages, such as 
+ allowing for injection of semantic context (e.g., "this operation preserves the structure property of the max 
+heap") or for compressing traces by dynamically skipping less interesting parts of the trajectory (e.g., repeated 
+logic within a for loop). We generate this data by prompting Qwen3-32B-FP8 (without thinking) (Yang et al., 
+2025a) to re-write execution traces from our function-level and CodeContests trace datasets.

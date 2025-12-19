@@ -1,0 +1,2 @@
+Extending §3, we here present additional examples of using CWM for SWE reasoning, trace prediction, and a 
+combination of the two.

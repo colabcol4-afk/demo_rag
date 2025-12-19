@@ -1,0 +1,2 @@
+meta. com/resources/models-and-libraries/cwm-downloads, 
+    huggingface.co/facebook/cwm, ..

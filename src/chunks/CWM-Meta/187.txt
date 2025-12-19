@@ -1,0 +1,4 @@
+Using graph neural networks for program termination. In Abhik Roychoudhury, Cristian 
+  Cadar, and Miryung Kim, editors, Proceedings of the 30th ACM Joint European Software Engineering Conference and 
+  Symposium on the Foundations of Software Engineering, ESEC/FSE 2022, Singapore, Singapore, November 14-18, 
+  2022, pages 910-921.

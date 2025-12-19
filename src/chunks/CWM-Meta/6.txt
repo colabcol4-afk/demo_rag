@@ -1,0 +1,10 @@
+1 
+<<<
+
+                       PRE-TRAINING                                  POST-TRAINING 
+               General         Code World Modeling      Supervised Fine-tuning Joint Reinforcement Learning 
+              Pre-training        Mid-training         Instruction and Reasoning Agentic and Reasoning 
+              8T tokens            5T tokens               100B tokens            172B tokens 
+              8k context          131k context             32k context            131k context 
+
+                                CWM pretrained              CWM sft                  CWM

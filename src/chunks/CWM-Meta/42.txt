@@ -1,0 +1,9 @@
+(Tool calls in purple, environment feedback in orange, 
+
+and reasoning in blue.) 
+
+                                                                                           7 
+<<<
+
+ Given a python code function and an assert statement containing a specific input, provide the assertion with the exact literal output that the function returns with that input. Do not 
+ include any mathematical expressions or function calls -- only the final literal value.

@@ -1,0 +1,3 @@
+Akshat Bubna, Alec Powell, Lucy Zhang, and Eric Zhang - for extensive support with remote execution, 
+infrastructure, and platform stability; Lovish Madaan, Binh Tang, Viktor Kerkez, Rishabh Agarwal, Alan 
+Schelten, Xuewei Wang and Jeremy Fu for support with mathematical expression comparison code. B   CWM Examples

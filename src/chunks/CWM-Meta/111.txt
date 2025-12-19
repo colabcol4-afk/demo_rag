@@ -1,0 +1,5 @@
+Data and RL environment mix. Worker nodes produce trajectories from three main data sources: software 
+engineering, competitive programming, and mathematics. They use the four RL environments we describe in 
+the previous sections, which we refer to as agentic SWE (§5.3.1), code (§5.3.2), agentic coding (§5.3.3), and 
+math (§5.3.4). Each data source may contain multiple datasets from different origins; however, all datasets 
+within the same data source share a consistent format and problem domain.

@@ -1,0 +1,13 @@
+After removing 
+cases where the final output prediction from Qwen diverges from the ground truth trace, we obtain 75 M 
+trajectories from standalone Python functions and 110 k from CodeContests data. 2.3   ForagerAgent: agentic midtraining data generation 
+We mid-train CWM on a large-scale dataset of interactions between an LLM-based software engineering agent 
+and a computational environment. This data is generated with our so-called ForagerAgent, which collects multi- 
+step trajectories by prompting an LLM with a software engineering task to solve in the context of a particular 
+code repository. Exposing CWM to such data at large scale early on should improve subsequent post-training 
+in similar environments, as model predictions should already be grounded in environment dynamics. The actions available to the agent are derived from the standard SWE-Agent (Yang et al., 2024) toolset: (i) 
+create a file, (ii) edit a file, (iii) run a bash command, and (iv) view or navigate inside a file. The trajectory 
+is concluded once the LLM, either Llama3-70B-Instruct (Dubey et al., 2024) or Qwen3-235B-A22B (w/o 
+thinking) (Yang et al., 2025a), believes the task has been solved or the number of tokens, turns, or API 
+costs exceed a hard limit. Like the repository-level tracing data, ForagerAgent relies on our set of executable 
+repository images (see §2.1) to seed problem generation.

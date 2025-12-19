@@ -1,0 +1,17 @@
+Open Weights                                                  Proprietary 
+       90 
+                   Base 
+                                                                                                                             80.2 
+       80         Test Time Scaling                                                                                  74.9* 
+       70           65.8                                                         69.2 69.6                     67.2 
+                                                                   62:4* 64.2                           61.6 
+  (%) 60                                       57.6 59.0 60.7* 
+                                 51.6 53.6 
+  score 50 
+  / 
+  rate 40 
+       30 
+  Solve 
+       20 
+       10 
+        0

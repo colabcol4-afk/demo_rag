@@ -1,0 +1,18 @@
+Table 11 BIGOBENCH results comparing CWM against Qwen3-32B (with reasoning), Qwen3-coder-30B, and Gemma-3- 
+27B on complexity prediction and complexity generation, for both time and space complexity. CWM outperforms our 
+set of baseline models for all metrics on time complexity prediction and generation. For space complexity generation, 
+CWM performs best on code-only pass@1 and ranks second on the remaining metrics. We refer to the main text for 
+details on the task and metrics. CWM     Qwen3-32B     Qwen3-coder-30B     Gemma-3-27B 
+      Prediction 
+        Time Complexity - all@1           41.3         39.0                36.6            37.7 
+        Space Complexity - all@1          12.3          15.1                9.1            13.1 
+      Generation 
+        Time Complexity 
+          Code Only - pass@1              76.1         70.0                43.8            34.4 
+          Code & Complexity - pass@1      31.3         29.1                20.3             13.3 
+          Code & Complexity - best@1     48.6          43.5                27.2             15.2 
+          Code & Complexity - all@1        7.6           6.5                5.5             2.1 
+         Space Complexity 
+          Code Only - pass@1              73.2         65.9                45.1            36.4 
+          Code & Complexity - pass@1      24.1         25.5                17.7             14.6 
+          Code & Complexity - best@1      36.6         39.6                26.3            20.6

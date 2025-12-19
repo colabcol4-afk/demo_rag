@@ -1,0 +1,7 @@
+Reducing memory consumption. We use PyTorch's AutoAC8 for activation checkpointing, which is integrated 
+in the "partitioner" layer of the torch. compile stack, and uses an integer-linear program solver to optimize 
+the memory-versus-recomputation tradeoff given a user-provided budget. We also leverage PyTorch's vocab- 
+and loss-parallel helpers to reduce memory consumption. 6.2   RL systems 
+We train our models using our own asynchronous distributed RL framework. The key distinction from the 
+standard 11m training lies in the data collection process: in RL, training data is gathered through rollouts 
+where the agent interacts with an environment. Rollouts.

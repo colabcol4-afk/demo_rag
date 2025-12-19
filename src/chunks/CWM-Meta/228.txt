@@ -1,0 +1,9 @@
+39 
+<<<
+
+Keisuke Sakaguchi, Ronan Le Bras, Chandra Bhagavatula, and Yejin Choi. Winogrande: An adversarial winograd 
+  schema challenge at scale. In The Thirty-Fourth AAAI Conference on Artificial Intelligence, AAAI 2020, The 
+  Thirty-Second Innovative Applications of Artificial Intelligence Conference, IAAI 2020, The Tenth AAAI Symposium 
+  on Educational Advances in Artificial Intelligence, EAAI 2020, New York, NY, USA, February 7-12, 2020, pages 
+  8732-8740. AAAI Press, 2020. doi: 10.1609/AAAI.V34I05.6399. https://doi.org/10.1609/aaai.v34i05.6399. John Schulman. Approximating kl divergence, 2020. https://joschu.net/blog/kl-approx.html. John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization 
+  algorithms. arXiv preprint ar Xiv: 1707.06347, 2017. Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Xiao Bi, Haowei Zhang, Mingchuan Zhang, Y. K. Li, Y.

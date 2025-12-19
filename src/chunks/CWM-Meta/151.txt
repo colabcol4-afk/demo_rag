@@ -1,0 +1,13 @@
+input arguments from the CruxEval test set, ask it to predict the function execution trace line-by-line, and 
+then compare its output prediction to the ground truth. To elicit trace prediction, we construct prompts 
+following our custom trace format, with the input containing the function as the code context, the call 
+arguments as the state, and the line containing the function definition as the first action. In addition to this 
+"full" execution trace prediction scenario, we also study a single-"step" scenario, for which we ask the model 
+to directly predict the return value of the function. This is achieved by replacing the <| line_sep|> token 
+with <| return_sep|>. We illustrate both formats in Figure B.22. We compare the "step" scenario to classic 
+CruxEval-output prediction, which few-shot prompts the model to directly predict outputs given function 
+definitions and inputs. Consequently, we compare the "full" trace prediction mode to CruxEval-output with 
+reasoning, which allows CWM to use reasoning as introduced in §5.3 before predicting the function output. Our results in Table 8 show that large compute budgets, either allowing for execution trace prediction or 
+reasoning, produce better results. CWM achieves a best score of 94.0% in natural language reasoning mode, 
+while full trace prediction achieves 88 %. Note that language reasoning traces are significantly more verbose, 
+using 1164 tokens on average compared to 497 tokens for full trace prediction. We also report results for

@@ -1,0 +1,2 @@
+Ayers, Dragomir Radev, and Jeremy Avigad. Proofnet: Autoformalizing and formally proving undergraduate-level mathematics, 2023. https://arxiv.org/abs/ 
+  2302. 12433.

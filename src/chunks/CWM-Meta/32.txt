@@ -1,0 +1,7 @@
+CWM's trace prediction to create a "neural debugger" whose capabilities go beyond traditional debugging, 
+such as jumping to future lines of code in constant time, predicting inputs to reach arbitrary states, or learning 
+abstract representations of program states that support program verification, debugging, or generation. Relatedly, we are excited about more direct uses of Python execution trace prediction to improve code gener- 
+ation. Under appropriate prompting, CWM can be used to predict execution traces for functions that are not 
+given directly in the context but are instead constrained only through natural language or formal asserts. After 
+trace prediction, the model then constructs the function body from the generated actions, which are the executed 
+Python statements.

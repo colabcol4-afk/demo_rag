@@ -1,0 +1,12 @@
+", "t": " .. "}       <|action_sep|> n = 0 
+                                               <Iframe_sep|> 
+              <|line_sep|> {"s": " .. ", "t": " .. ", "n": "0"} <|action_sep|> for c in s: 
+                                               <|frame_sep|> 
+              <|line_sep|> {"s": " .. ", "t": " .. ", "n": " .. ", "c": "'s'"} <|action_sep|> n += int(c == t) 
+                                                   ... <|frame_sep|> 
+               <|return_sep|> <|action_sep|> return n <|arg_sep|>          "3" 
+                                               <|frame_sep|> 
+
+Figure 3 CWM format for Python traces. Given a source code context and a marker of the trace starting point, CWM 
+predicts a series of stack frames representing the Program states and the actions (executed code). enables us to align code and execution trace to simulate observation-action data within the computational 
+ environment.

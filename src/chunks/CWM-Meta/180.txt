@@ -1,0 +1,2 @@
+It is not 
+multilingual and performance in other languages has not been evaluated or optimized.

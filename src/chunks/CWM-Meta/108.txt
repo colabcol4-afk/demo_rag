@@ -1,0 +1,4 @@
+This helps avoid wasting compute on easy problems and 
+reduces the risk of reinforcing incorrect reasoning followed by a correctly memorized answer. The prompt set 
+used for RL training contains a total of 278 k problem-answer pairs. 18 
+<<<

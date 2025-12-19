@@ -1,0 +1,17 @@
+Tokenizer. CWM uses the Llama 3 tokenizer (Dubey et al., 2024) which is a fast Byte-Pair Encoding tokenizer 
+implemented with TikToken.2 The vocabulary contains 128 000 regular tokens as well as 256 reserved tokens. We keep the control tokens from Llama 3 and leverage unused reserved tokens to support our tracing and 
+reasoning use cases. 4.2    Two-stage pre-training 
+CWM pre-training consists of two stages sharing learning-rate scheduler and optimizer states but differing in 
+datamix and maximum document lengths: 
+
+   1. General pre-training: We begin with an initial pre-training phase on 8 T tokens from a diverse range of 
+      mostly English sources, with an emphasis on coding data (making up about 30 % of the mix) as well as 
+      STEM and general knowledge. We pre-train our model with a global batch size of 8.4 M tokens and a 
+      context length of 8192 tokens.3 
+
+   2. Code world model mid-training: We then mid-train the model for an additional 5 T tokens. We here 
+      depart from our more generalist pre-training datamix and introduce a number of datasets in support of 
+      our code world modeling objectives. We mid-train with a global batch size of 33 M tokens and maximum 
+      context length of 131 k tokens. 4 
+Mid-training is the key stage for teaching code world modeling capabilities. Next, we discuss the changes we 
+make to the pre-training recipe during mid-training to optimize CWM performance.

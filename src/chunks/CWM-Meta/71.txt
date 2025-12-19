@@ -1,0 +1,12 @@
+Datamix. We train on a diverse mix of internal and open-access data during SFT, including standard 
+instruction-following datasets. About 30% of the datamix is rehearsal from mid-training (which itself includes 
+30 % pre-training data). This is to avoid overfitting to the SFT distribution ahead of RL and retain CWM 
+capabilities taught in mid-training. Our datamix also contains agentic SWE RL trajectories (see §5.3.1), some of 
+which have been rejection-sampled from earlier iterations of the CWM itself. We have generally found it useful 
+to iteratively improve the starting point for RL by including trajectories from earlier iterations in the next SFT. Similarly, we include external datasets with reasoning traces, as we have found the performance benefit from 
+them carries through to our final post-RL model. Specifically, we use the OpenMathReasoning (Moshkov et al., 
+2025) and OpenCodeReasoning (Ahmad et al., 2025) datasets that rely on DeepSeek-R1 (Guo et al., 2025). Reasoning tokens. For SFT training on reasoning data, we introduce <| reasoning_thinking_start |> and 
+<| reasoning_thinking_end |> tokens that surround any reasoning text. Because we mask the loss on all 
+<| reasoning_thinking_start |> tokens, the model does not learn to generate them. This enables both 
+reasoning and non-reasoning behavior for the CWM-SFT model: non-reasoning mode is active by default and 
+reasoning mode can be activated by injecting <| reasoning_thinking_start |> into the beginning of assistant

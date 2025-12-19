@@ -1,0 +1,13 @@
+As manually building arbitrary 
+GitHub repositories cannot scale to our desired dataset size, we apply both LLM- and CI-assisted methods. For the former, an LLM-backed agent, denoted as RepoAgent, was tasked with setting up the development 
+environment of a target repository, finding test files, and ensuring that a significant number of them could 
+run and pass. To support its efforts, we provide RepoAgent with human-readable documentation extracted 
+from the target repository. Although this further improves RepoAgent's success rates, human-targeted 
+documentation can suffer from inaccuracies due to lack of verifiability and insufficient maintenance incentives. In contrast, machine-targeted instructions must remain accurate for successful builds, with platforms like 
+GitHub immediately signaling failures. Therefore, we also developed the Activ (Act in virtual) pipeline to repurpose GitHub Actions CI execution 
+for building executable repository images. This pipeline runs the workflows locally via the act (Lee, 2019) 
+library. Since many GitHub Actions workflows are not designed for third-party execution and not limited to 
+CI builds, we modify the target repository's source code and trigger an early exit after the completion of a 
+single successful build. As all GitHub Actions workflow jobs run simultaneously in individual containers and 
+the build state is transient, we add or modify the repository's pytest configuration files, to inject a fixture that 
+is automatically run at test-execution time. This fixture captures the build state of the container running unit

@@ -1,0 +1,6 @@
+[your ... final solution here] 
+
+  ... follow these steps: 1) Reason about the problem and write an initial solution using <tool: create>. 2) Write tests for your solution using 
+ <tool: create> or <tool: edit> ... 3) Compile your code (if applicable) and run the tests using <tool: bash>. 4) If any tests fail, analyze why the 
+ solution is incorrect. Use <tool: edit> to fix the issues ... 5) Iterate over the above steps until you are confident that your solution is correct ... 6) Provide a final response that satisfies the required response format ... <think> ... <tool: create> ... ... <think>     <tool: bash> python ... ... <think> .. <tool: edit>    ... <think>     ... ... ... <think> ... let's summarize the ... < /think> ** Summary and Approach ** The problem requires ... ** Final Solution ** python ... Figure 11 Example interaction for the agentic coding RL environment. The agent uses reasoning and tools to solve 
+competitive programming problems. Before generating a final solution, the agent summarizes the interaction. environment.

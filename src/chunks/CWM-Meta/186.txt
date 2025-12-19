@@ -1,0 +1,3 @@
+Joshua Ainslie, James Lee-Thorp, Michiel De Jong, Yury Zemlyanskiy, Federico Lebrón, and Sumit Sanghai. Gqa: 
+  Training generalized multi-query transformer models from multi-head checkpoints. ar Xiv preprint ar Xiv:2305.13245, 
+  2023. Yoav Alon and Cristina David.

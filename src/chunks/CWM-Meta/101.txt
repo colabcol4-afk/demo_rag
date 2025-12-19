@@ -1,0 +1,12 @@
+The code solution passes all unit tests within the specified time and memory limits. We execute the 
+      unit tests in parallel using an internal code execution service on remote machines. Data sourcing and filtering. We source coding problems from various programming contest websites. A problem 
+ typically consists of a problem description, limitations on the input and output domains, memory and time 
+ limits, and input-output examples. In addition, each problem comes with a set of tests that we use to verify 
+ the correctness of candidate solutions: a solution is considered correct only if it produces the expected output 
+for any given test input. We decontaminate the coding problems against test benchmarks and de-duplicate them to ensure that each 
+ training problem is unique. In both cases, we use MinHash-based similarity detection6, applying word- or 
+ character-based matching depending on the length of each document. This process ensures the integrity of 
+ our evaluations, which is especially important for code generation and mathematical problems, where data 
+ contamination can significantly affect performance metrics. We use Llama-3.3-70B-Instruct to identify and remove poorly posed problems, such as those containing 
+ gibberish, missing or truncated problem statements, or lacking input/output descriptions. We do not apply 
+ any difficulty-based filtering.

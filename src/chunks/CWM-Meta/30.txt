@@ -1,0 +1,9 @@
+Post-processing. To avoid overfitting to repetitive interactions, we apply a near-deduplication of trajectories 
+foraged from the same source repository: we first represent a trajectory by the concatenation of its actions, 
+then encode the trajectory using MinHash, and lastly drop trajectories such that the pairwise Jaccard similarity 
+for all encoded trajectories we keep is less than 0.5. Because our goal with the ForagerAgent data is to learn 
+a comprehensive world model of agentic interactions with code environments, we do not filter trajectories 
+based on whether they succeed at bug or issue resolution. Following the same motivation, we further train 
+the model to predict both agent and environment turns, although we stochastically mask loss for 50 % of 
+observations as they exhibit limited diversity. Overall, we are left with 3 M trajectories obtained from 10.2k 
+images, and we refer to Table 1 for more detailed statistics. 3    Examples of code world modeling

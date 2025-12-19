@@ -1,0 +1,11 @@
+Senior core contributors 
+
+Taco Cohen                    Yossi Adi                      Gabriel Synnaeve 
+
+                                           34 
+<<<
+
+References 
+
+Sandhini Agarwal, Lama Ahmad, Jason Ai, Sam Altman, Andy Applebaum, Edwin Arbus, Rahul K Arora, Yu Bai, 
+  Bowen Baker, Haiming Bao, et al. gpt-oss-120b & gpt-oss-20b model card. ar Xiv preprint arXiv:2508.10925, 2025.

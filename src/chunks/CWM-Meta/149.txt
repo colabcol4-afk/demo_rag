@@ -1,0 +1,12 @@
+Terminal-Bench. Another multi-turn agentic coding benchmark that is gaining in popularity is Terminal- 
+Bench (The Terminal-Bench Team, 2025). In Terminal-Bench, the agent is asked to solve various complex 
+tasks by operating directly in a tmux session. Again, we align the prompts and response parsing of the 
+Terminus-112 agent provided by the benchmark with our RL training phase: we modify the system prompt to 
+use the tools that CWM was trained with (see Figure 8) and parse the model output back into the format 
+that Terminus-1 expects. We also include reasoning tokens from prior turns into the agent's history. In this 
+setup, CWM achieves a 26.25% accuracy with the Terminus 1 agent following the default budget of 50 turns. Table 7 shows this places CWM below 04-mini but above Gemini 2.5 Pro on the Terminal-Bench leaderboard. 7.3   Execution trace prediction 
+Next, we analyze the ability of CWM to perform trace prediction, analyze its prediction, and explore this 
+ability to predict program termination. CruxEval-O as execution trace prediction. The following experiment evaluates CWM's ability to predict 
+Python execution traces using the format introduced in §2.2. We prompt the model with functions and 
+  11 See https://exercism.org/. 12 See https: //www.tbench.ai/terminus. 26 
+<<<

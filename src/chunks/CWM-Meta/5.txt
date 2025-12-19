@@ -1,0 +1,15 @@
+We believe that advancing code generation with LLMs may require new training and modeling paradigms. Typically, code is treated the same as any other text data during pre-training: the model learns to predict 
+code line by line, from left to right and top to bottom. We think this is not sufficient - to master coding, one 
+must understand not just what code looks like but what it does when executed. Such skill is instrumental to 
+the everyday work of software engineers: at a local level, they understand how the execution of a line of code 
+changes the state of the local variables, and, at a global level, they can make predictions about how changes 
+to a codebase affect program outputs. Yet, teaching LLMs such code world modeling capabilities is typically 
+not considered before post-training. We release Code World Model (CWM), a new LLM for code generation and reasoning that has been trained 
+on large amounts of code world modeling data. Concretely, CWM is mid-trained on two different kinds 
+of observation-action trajectories that capture important aspects of software development: Python code 
+execution traces and agentic interactions with Docker environments. Mid-training on such data at scale should 
+help improve coding performance by grounding our model's predictions in the underlying dynamical systems 
+and provide a superior starting point for RL. For the Python execution data, actions are Python statements and observations contain the contents of the 
+
+                                                 1 
+<<<

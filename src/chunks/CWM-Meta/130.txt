@@ -1,0 +1,18 @@
+Execution infrastructure. Our training pipeline leverages an internal code execution service to safely execute 
+tens of thousands of code snippets per second, in parallel across multiple programming languages and 
+asynchronously in isolated containerized environments. This code execution service is integrated into our 
+training loop to provide execution results including stdout, stderr, exit codes, and environment state as 
+feedback to the LLM. Containerized execution for agentic RL. We use a custom tool-based execution environment for agentic re- 
+inforcement learning, enabling agents to interact with containerized environments through structured tool 
+calls for agentic tasks. It features a core tool execution framework based on flexible container backends (e.g., 
+  9 See https: //github.com/facebookresearch/moodist. 22 
+<<<
+
+                                      Trajectory n        Trajectory n+1 Trajectory n+2 
+
+                       worker n+1                                                     Rollout threads 
+
+                 Workers 
+                                                                                       Observation 
+                        worker n                                                       Tokens 
+                                                                                       generation

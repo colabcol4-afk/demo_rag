@@ -1,0 +1,21 @@
+32 
+<<<
+
+9    Conclusion 
+
+Our vision is for Code World Models to bridge the gap between language-level reasoning and executable 
+semantics. We believe that coding and agentic use cases of LLMs will benefit from having a world model, a 
+learned transition function between states conditioned on actions. With the release of CWM, we present 
+the first steps of this vision. Our ablations already show that world modeling data, Python execution 
+traces, and executable Docker environments can be directly beneficial for downstream task performance. More broadly though, CWM provides a strong test-bed for future research in zero-shot planning, grounded 
+chain-of-thought, and reinforcement learning with sparse, verifiable rewards. Similar to our early results with 
+execution trace prediction, we believe that the Python tracing world model enables research on reasoning 
+about code generation, execution, correctness, and verification. World models should improve reinforcement 
+learning because agents that are already familiar with the dynamics of the environment can focus on learning 
+which actions lead to rewards. More research is needed to consistently leverage the benefits of incorporating 
+world models into LLMs during pre-training across tasks. Ultimately, models that can reason about the 
+consequences of their actions should be much more efficient in their interactions with the environment which 
+should allow for scaling the complexity of the tasks they perform. 33 
+<<<
+
+Authors: Meta FAIR CodeGen Team

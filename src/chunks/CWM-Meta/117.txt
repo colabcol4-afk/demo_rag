@@ -1,0 +1,9 @@
+Length reward scheduling. In both the code and mathematics environments, we allow context lengths of 
+up to 64 k. We observe that, at the start of RL training, the model rapidly increases its response length, 
+leading to inefficient token usage. To address this, we penalize the reward for correct but overlong solutions 
+similar to DAPO (Yu et al., 2025), but gradually phase out this penalty over training. Specifically, we linearly 
+interpolate the reward between 1 and -1 for correct answers with a length that exceeds a soft maximum (8k 
+at the beginning of training) but is lower than the hard maximum of 64 k. This provides a dense reward signal 
+to the model that incentivizes it to reduce its response length, while still providing a positive signal when the 
+answer is correct. During training, we gradually increase the soft maximum in a continuous manner until it is 
+equal to the hard maximum after 10k training steps.

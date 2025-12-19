@@ -1,0 +1,12 @@
+Repos   Images Trajectories   Issues-Fix                         Mutate-Fix 
+                                             Functions Arguments     Variables Statements   Operators 
+   3.15k   10.2k       3M           55% 
+                                                7%          9 %        6%          11 %        12 % 
+
+We filter out mutations that cannot be applied for a given function by parsing the corresponding abstract 
+syntax tree (AST). Lastly, we verify that applying the candidate mutation does in fact cause the associated 
+unit tests to fail. We can now use the mutation as a starting point for agentic data collection: we instruct the 
+agent to inspect the mutated function, run its unit tests, and resolve the failing tests by fixing the bug. Issue-fix tasks. For issue-fix tasks, we prompt the model to fix real issues in our set of repositories, using both 
+issue and pull request data from GitHub. We check out commits preceding bug-fixing PRs and task the agent 
+with resolving failing unit tests, providing the corresponding GitHub issue descriptions for context. We ensure 
+unit tests are failing before the PRs and that their resolution is necessary and sufficient for addressing the issues.

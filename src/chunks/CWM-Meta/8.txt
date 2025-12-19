@@ -1,0 +1,14 @@
+Data 
+from ForagerAgent, on the other hand, is large scale and included already during mid-training, helping shape 
+internal representations ahead of post-training. CWM uses a dense, decoder-only Transformer architecture (Vaswani et al., 2017; Radford et al., 2018) with 
+32 B parameters, interleaved sliding window attention supporting up to 131 k tokens context size, and is 
+trained over pre-, mid-, and post-training phases (see Figure 1). With quantization, inference with CWM can 
+be performed on a single 80 GB NVIDIA H100. Beyond world modeling capabilities, CWM achieves strong 
+performance on general and agentic coding and reasoning tasks relative to other open-weights models of 
+comparable size: it reaches pass@1 scores of 65.8 % on SWE-bench Verified (with test-time scaling; see Figure 2), 
+68.6% on LiveCodeBench-v5, 96.6% on Math-500, 76.0% on AIME 2024, and 94.3% on CruxEval Output. First and foremost, the release of CWM is meant to enable novel research on improving code generation 
+with world modeling. We are excited by this vision and our report provides early supportive evidence: we 
+give examples of how world models can benefit agentic coding, enable step-by-step simulation of Python 
+code execution, and show early results of how reasoning can benefit from the latter. However, we believe the 
+best is yet to come and hope to join forces with the open source research community to explore how world 
+models can be used to leverage reasoning and planning to improve code generation. To this end, we release

@@ -1,0 +1,4 @@
+Tran, Fuqiang Li, Ren Ma, Mingzhang Zheng, Bill Qian, Yanjun Shao, Niklas Muennighoff, 
+  Yizhe Zhang, Binyuan Hui, Junyang Lin, Robert Brennan, Hao Peng, Heng Ji, and Graham Neubig. Openhands: 
+  An open platform for AI software developers as generalist agents. In The Thirteenth International Conference on 
+  Learning Representations, 2025. https://openreview.net/forum?id=0Jd3ayDDoF.

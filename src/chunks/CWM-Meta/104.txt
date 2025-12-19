@@ -1,0 +1,5 @@
+Instead, the agent needs to provide the solution in its final response, which is then extracted 
+for evaluation. We consider two programming languages, Python and C++, where the images used for 
+agentic interaction are python: 3.11-slim for Python and python: 3.11-bookworm (with gcc 12 support) for 
+C++. The final solution is then evaluated using the same execution infrastructure as for the competitive 
+programming environment.

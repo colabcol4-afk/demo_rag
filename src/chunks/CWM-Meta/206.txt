@@ -1,0 +1,7 @@
+Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor Cai, Eliza Rutherford, Diego 
+  de Las Casas, Lisa Anne Hendricks, Johannes Welbl, Aidan Clark, et al. Training compute-optimal large language 
+  models. arXiv preprint ar Xiv:2203.15556, 2022. Cheng-Ping Hsieh, Simeng Sun, Samuel Kriman, Shantanu Acharya, Dima Rekesh, Fei Jia, Yang Zhang, and Boris 
+  Ginsburg. Ruler: What's the real context size of your long-context language models? ar Xiv preprint ar Xiv:2404.06654, 
+  2024. Jingcheng Hu, Yinmin Zhang, Qi Han, Daxin Jiang, Xiangyu Zhang, and Heung-Yeung Shum. Open-reasoner-zero: 
+  An open source approach to scaling up reinforcement learning on the base model, 2025. https://arxiv.org/abs/ 
+  2503.24290.

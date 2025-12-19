@@ -1,0 +1,4 @@
+Karl Cobbe, Vineet Kosaraju, Mohammad Bavarian, Mark Chen, Heewoo Jun, Lukasz Kaiser, Matthias Plappert, 
+  Jerry Tworek, Jacob Hilton, Reiichiro Nakano, Christopher Hesse, and John Schulman. Training verifiers to solve 
+  math word problems. CoRR, abs/2110.14168, 2021. https://arxiv.org/abs/2110.14168. Taco Cohen, David W. Zhang, Kunhao Zheng, Yunhao Tang, Rémi Munos, and Gabriel Synnaeve. Soft policy 
+  optimization: Online off-policy RL for sequence models. CoRR, abs/2503.05453, 2025. doi: 10.48550/ARXIV.2503. 05453. https://doi.org/10.48550/arXiv.2503.05453.

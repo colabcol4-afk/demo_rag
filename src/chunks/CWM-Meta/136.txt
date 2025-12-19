@@ -1,0 +1,6 @@
+agentic SBV trajectory NLLs or CruxEval. Further incorporating execution trace data significantly improves 
+CruxEval-input and -output prediction but leaves all SBV-related metrics unaffected. Lastly, only the addition 
+of Forager Agent data improves agentic SBV NLLs. The ForagerAgent data is further able to improve SBV 
+pass@1 scores by another 3.7% . 7.2   Agentic evaluation 
+
+SWE-bench Verified.

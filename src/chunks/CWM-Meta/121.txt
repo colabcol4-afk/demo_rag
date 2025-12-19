@@ -1,0 +1,11 @@
+Table 3 Summary of the training setup for the different CWM training stages on H100 GPUs. Phase                    Seq. Length     Batch size    # GPUs     Shards 
+                                                                               DP   TP 
+             Pre-training                     8 k         8.4M         2048   1024    2 
+             Mid-training                   131 k        33.6M         2048    256    8 
+             Supervised Fine-tuning          32 k         2.1M          256     32    8 
+             Reinforcement Learning         131 k 8.4M/16.8M     2560/4608      64    8 
+
+Reducing communication overhead for tensor parallelism. We reduced the communication overhead of tensor 
+parallelism (which we implement as sequence parallelism) by more-effectively overlapping it with computation 
+via decomposition and micropipelining, using PyTorch's Asynchronous Tensor Parallel (Async-TP) feature7, 
+derived from xFormers (Lefaudeux et al., 2022) and originally inspired by Wang et al. (2022a).

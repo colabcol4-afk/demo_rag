@@ -1,0 +1,6 @@
+Rowan Zellers, Ari Holtzman, Yonatan Bisk, Ali Farhadi, and Yejin Choi. Hellaswag: Can a machine really finish your 
+  sentence? In Anna Korhonen, David R. Traum, and Lluís Marquez, editors, Proceedings of the 57th Conference 
+  of the Association for Computational Linguistics, ACL 2019, Florence, Italy, July 28- August 2, 2019, Volume 
+  1: Long Papers, pages 4791-4800. Association for Computational Linguistics, 2019. doi: 10.18653/V1/P19-1472. https://doi.org/10.18653/v1/p19-1472. Biao Zhang and Rico Sennrich. Root mean square layer normalization. Curran Associates Inc., Red Hook, NY, USA, 
+  2019. David W Zhang, Michaël Defferrard, Corrado Rainone, and Roland Memisevic. Grounding code understanding in 
+  step-by-step execution. https://openreview.net/forum?id=MUr7F193QS.
