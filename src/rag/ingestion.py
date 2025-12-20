@@ -55,6 +55,45 @@ MAX_SECTION_CHARS = 8000  # Pre-split large docs
 EMBEDDING_DIMENSION = 1024
 
 # ============================================================================
+# ENVIRONMENT VALIDATION
+# ============================================================================
+
+def validate_environment():
+    """Validate all required environment variables are set."""
+    required_vars = {
+        "LLMWHISPERER_API_KEY": LLMWHISPERER_API_KEY,
+        "NVIDIA_API_KEY": NVIDIA_API_KEY,
+        "QDRANT_URL": QDRANT_URL,
+        "QDRANT_API_KEY": QDRANT_API_KEY,
+    }
+    
+    missing = [name for name, value in required_vars.items() if not value]
+    
+    if missing:
+        print(f"\n❌ Missing required environment variables: {', '.join(missing)}")
+        print("\nPlease set them in your .env file or Streamlit secrets")
+        sys.exit(1)
+    
+    print("✅ All environment variables loaded")
+
+
+def fix_qdrant_url(url: str) -> str:
+    """Ensure Qdrant URL has the correct port."""
+    if not url:
+        return url
+    
+    # Remove trailing slash
+    url = url.rstrip("/")
+    
+    # Add port if missing
+    if ":6333" not in url and ":6334" not in url:
+        url = f"{url}:6333"
+        print(f"⚠️  Added default port to URL")
+    
+    return url
+
+
+# ============================================================================
 # TRACKING MANAGEMENT
 # ============================================================================
 
@@ -235,7 +274,7 @@ def chunk_text(text: str, doc_name: str, embedder) -> List[str]:
     # Validate chunk sizes
     validated_chunks = validate_chunks(all_chunks, MAX_CHUNK_CHARS, CHUNK_OVERLAP)
 
-    avg_size = sum(len(c) for c in validated_chunks) // len(validated_chunks)
+    avg_size = sum(len(c) for c in validated_chunks) // len(validated_chunks) if validated_chunks else 0
     print(f"     ✓ Created {len(validated_chunks)} chunks (avg: {avg_size} chars)")
 
     return validated_chunks
@@ -245,10 +284,10 @@ def chunk_all_documents(parsed_docs: Dict[str, str]) -> Dict[str, List[str]]:
     Chunk all parsed documents.
 
     Returns:
-        Dict of {doc_name: [chunks]}
+        Dict of {doc_name: [chunks]}, embedder
     """
     if not parsed_docs:
-        return {}
+        return {}, None
 
     print(f"\n🔧 Initializing semantic chunker...")
     embedder = NVIDIAEmbeddings(
@@ -298,27 +337,64 @@ def create_documents_from_chunks(chunked_docs: Dict[str, List[str]]) -> List[Doc
 
     return documents
 
+def test_qdrant_connection(url: str, api_key: str) -> QdrantClient:
+    """Test Qdrant connection and return client if successful."""
+    print(f"\n🔗 Connecting to Qdrant Cloud...")
+    print(f"   URL: {url[:60]}...")
+    
+    try:
+        # Create client with REST API
+        client = QdrantClient(
+            url=url,
+            api_key=api_key,
+            prefer_grpc=False,  # ✅ Use REST API instead of gRPC
+            timeout=60,
+            check_compatibility=False,  # ✅ Skip version check warning
+        )
+        
+        # Test connection by listing collections
+        print(f"   🧪 Testing connection...")
+        collections = client.get_collections()
+        collection_names = [col.name for col in collections.collections]
+        
+        print(f"   ✅ Connected successfully!")
+        print(f"   📋 Available collections: {collection_names if collection_names else 'None'}")
+        
+        return client
+        
+    except Exception as e:
+        print(f"\n❌ Failed to connect to Qdrant!")
+        print(f"\n🔧 Error Details:")
+        print(f"   {str(e)}")
+        print(f"\n💡 Troubleshooting:")
+        print(f"   1. Verify QDRANT_URL is correct: {url}")
+        print(f"   2. Check QDRANT_API_KEY is valid")
+        print(f"   3. Ensure Qdrant Cloud cluster is running")
+        print(f"   4. Try accessing {url} in your browser")
+        raise
+
+
 def upload_to_vector_store(chunked_docs: Dict[str, List[str]], embedder):
     """Upload chunks directly to Qdrant."""
     if not chunked_docs:
         print("\n✅ No new chunks to upload")
-        return
+        return 0
 
-    print(f"\n🔗 Connecting to Qdrant Cloud...")
-
-    # Create client
-    client = QdrantClient(
-        url=QDRANT_URL,
-        api_key=QDRANT_API_KEY,
-        prefer_grpc=False,
-    )
-
+    # Fix URL if needed
+    qdrant_url = fix_qdrant_url(QDRANT_URL)
+    
+    # Test connection first
+    client = test_qdrant_connection(qdrant_url, QDRANT_API_KEY)
+    
     # Get or create collection
     collections = client.get_collections().collections
     collection_exists = any(col.name == COLLECTION_NAME for col in collections)
 
     if not collection_exists:
-        print(f"   → Creating collection: {COLLECTION_NAME}")
+        print(f"\n📦 Creating collection: {COLLECTION_NAME}")
+        print(f"   → Vector size: {EMBEDDING_DIMENSION}")
+        print(f"   → Distance metric: COSINE")
+        
         client.create_collection(
             collection_name=COLLECTION_NAME,
             vectors_config=VectorParams(
@@ -326,8 +402,9 @@ def upload_to_vector_store(chunked_docs: Dict[str, List[str]], embedder):
                 distance=Distance.COSINE
             )
         )
+        print(f"   ✅ Collection created!")
     else:
-        print(f"   ✓ Using existing collection: {COLLECTION_NAME}")
+        print(f"\n   ✓ Using existing collection: {COLLECTION_NAME}")
 
     # Create vector store
     vector_store = QdrantVectorStore(
@@ -344,17 +421,27 @@ def upload_to_vector_store(chunked_docs: Dict[str, List[str]], embedder):
     print(f"\n⬆️  Uploading {len(documents)} chunks to Qdrant...\n")
 
     batch_size = 100
-    for i in tqdm(range(0, len(documents), batch_size), desc="Uploading"):
-        batch_docs = documents[i:i + batch_size]
-        batch_ids = document_ids[i:i + batch_size]
-        vector_store.add_documents(documents=batch_docs, ids=batch_ids)
+    total_uploaded = 0
+    
+    try:
+        for i in tqdm(range(0, len(documents), batch_size), desc="   Uploading"):
+            batch_docs = documents[i:i + batch_size]
+            batch_ids = document_ids[i:i + batch_size]
+            vector_store.add_documents(documents=batch_docs, ids=batch_ids)
+            total_uploaded += len(batch_docs)
 
-    # Verify
-    collection_info = client.get_collection(collection_name=COLLECTION_NAME)
-    print(f"\n✅ Upload complete!")
-    print(f"   • Total vectors in collection: {collection_info.points_count}")
+        # Verify
+        collection_info = client.get_collection(collection_name=COLLECTION_NAME)
+        print(f"\n✅ Upload complete!")
+        print(f"   • Chunks uploaded this run: {total_uploaded}")
+        print(f"   • Total vectors in collection: {collection_info.points_count}")
 
-    return len(documents)
+        return total_uploaded
+        
+    except Exception as e:
+        print(f"\n❌ Upload failed!")
+        print(f"   Error: {str(e)}")
+        raise
 
 # ============================================================================
 # MAIN PIPELINE
@@ -366,11 +453,16 @@ def run_pipeline(auto_confirm=False):
     print("=" * 70)
     print("🚀 IN-MEMORY RAG INGESTION PIPELINE")
     print("=" * 70)
+    
+    # Validate environment
+    validate_environment()
 
     # Check data folder
     if not DATA_FOLDER.exists():
         print(f"\n❌ Data folder not found: {DATA_FOLDER}")
-        return
+        print(f"   Creating data folder...")
+        DATA_FOLDER.mkdir(parents=True, exist_ok=True)
+        print(f"   ✓ Data folder created")
 
     print(f"\n📂 Data folder: {DATA_FOLDER}")
 
