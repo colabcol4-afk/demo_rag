@@ -310,7 +310,7 @@ def upload_to_vector_store(chunked_docs: Dict[str, List[str]], embedder):
     client = QdrantClient(
         url=QDRANT_URL,
         api_key=QDRANT_API_KEY,
-        prefer_grpc=True,
+        prefer_grpc=False,
     )
 
     # Get or create collection
