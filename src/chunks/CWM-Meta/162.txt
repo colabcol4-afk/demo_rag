@@ -1,3 +1,0 @@
-expected. Still, these findings should be interpreted cautiously: the benchmark is based on small, self-contained 
-programs and does not reflect the challenges of real-world software, where bugs must be detected in large and 
-complex codebases.

@@ -1,10 +1,0 @@
-40 
-<<<
-
-Yuxiang Wei, Olivier Duchenne, Jade Copet, Quentin Carbonneaux, Lingming Zhang, Daniel Fried, Gabriel Synnaeve, 
-  Rishabh Singh, and Sida I. Wang. Swe-rl: Advancing Ilm reasoning via reinforcement learning on open software 
-  evolution. ar Xiv preprint ar Xiv: 2502.18449, 2025. Chunqiu Steven Xia, Yinlin Deng, Soren Dunn, and Lingming Zhang. Agentless: Demystifying Ilm-based software 
-  engineering agents. arXiv preprint, 2024. Wenhan Xiong, Jingyu Liu, Igor Molybog, Hejia Zhang, Prajjwal Bhargava, Rui Hou, Louis Martin, Rashi Rungta, 
-  Karthik Abinav Sankararaman, Barlas Oguz, et al. Effective long-context scaling of foundation models. ar Xiv 
-  preprint arXiv:2309.16039, 2023. An Yang, Anfeng Li, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chang Gao, Chengen Huang, 
-  Chenxu Lv, et al. Qwen3 technical report. arXiv preprint ar Xiv:2505.09388, 2025a.

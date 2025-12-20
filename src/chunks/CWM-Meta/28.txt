@@ -1,5 +1,0 @@
-Table 1 Statistics of ForagerAgent trajectories. We gather 3 M trajectories from 10.2 k images and 3.15 k underlying 
-repositories. The trajectories are split 55-45 between issue- and mutate-fix tasks. Repos   Images Trajectories   Issues-Fix                         Mutate-Fix 
-                                             Functions Arguments     Variables Statements   Operators 
-   3.15k   10.2k       3M           55% 
-                                                7%          9 %        6%          11 %        12 %

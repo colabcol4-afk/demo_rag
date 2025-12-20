@@ -1,4 +1,0 @@
-Once you've submitted at least once and 
- are confident in your solution, provide a final response summarizing your work ... Your primary objective is to ensure patch correctness above all else - thoroughly explore the codebase, think hard, and leverage significant 
- execution to verify correctness by writing comprehensive tests to validate your solution and running existing tests to prevent regressions. Only submit when you are genuinely confident in your patch's correctness ... <think> ... <tool: bash> ... ... <think>    <tool: edit>   ... <think>    <tool: bash> pytest   ... <think>     ... ... <think> ... < /think> <tool: bash> git diff ... > submission. patch </tool> (No output) 
- <think> ... < /think> <tool: submit> submission. patch </tool> The following patch content is marked as your final submission ... <think> ... Now, I'll provide a summary ... < /think> ## Issue summary ... ## Reproduction ... ## Code changes ...

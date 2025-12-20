@@ -1,5 +1,0 @@
-Agentic SWE RL substantially improves our model's software reasoning and engineering capability 
-(e.g., on SWE-bench Verified (Jimenez et al., 2024)) by enhancing the model's agentic reasoning and tool-use 
-skills (see §K for the capability evolution during RL training). Its philosophy is to remain simple yet general: 
-an LLM agent tackles a task end-to-end through reasoning and tool execution, without relying on task-specific 
-post-processing. The same design is applied to the agentic coding environment (see §5.3.3).

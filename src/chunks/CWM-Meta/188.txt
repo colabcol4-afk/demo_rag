@@ -1,2 +1,0 @@
-ACM, 2022. doi: 10.1145/3540250.3549095. https://doi.org/10.1145/3540250.3549095. Anthropic. Claude 3.7 sonnet and claude code, February 2025. https://www.anthropic.com/news/claude-3-7-sonnet. Anthropic. Raising the bar on swe-bench verified with claude 3.5 sonnet. 2025. https://www.anthropic.com/ 
-  engineering/swe-bench-sonnet. Accessed 2025-08-18. Hugh Leather Aram H.

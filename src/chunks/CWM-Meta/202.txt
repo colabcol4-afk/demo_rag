@@ -1,5 +1,0 @@
-36 
-<<<
-
-Alex Gu, Baptiste Rozière, Hugh Leather, Armando Solar-Lezama, Gabriel Synnaeve, and Sida I. Wang. Cruxeval: A 
-  benchmark for code reasoning, understanding and execution. arXiv preprint ar Xiv:2401.03065, 2024.

@@ -1,7 +1,0 @@
-Samir Yitzhak Gadre, Georgios Smyrnis, Vaishaal Shankar, Suchin Gururangan, Mitchell Wortsman, Rulin Shao, 
-  Jean Mercat, Alex Fang, Jeffrey Li, Sedrick Keh, et al. Language models scale reliably with over-training and on 
-  downstream tasks. arXiv preprint arXiv:2403.08540, 2024. Bofei Gao, Feifan Song, Zhe Yang, Zefan Cai, Yibo Miao, Qingxiu Dong, Lei Li, Chenghao Ma, Liang Chen, Runxin 
-  Xu, Zhengyang Tang, Benyou Wang, Daoguang Zan, Shanghaoran Quan, Ge Zhang, Lei Sha, Yichang Zhang, 
-  Xuancheng Ren, Tianyu Liu, and Baobao Chang. Omni-math: A universal olympiad level mathematic benchmark 
-  for large language models. In The Thirteenth International Conference on Learning Representations, ICLR 2025, 
-  Singapore, April 24-28, 2025. OpenReview.net, 2025. https://openreview.net/forum?id=yaqPfØKAIN.

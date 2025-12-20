@@ -1,12 +1,0 @@
-activation_memory_budget < 1. 21 
-<<<
-
-                         Reasoning                 Observation 
-  . start                                                                           ... Tokens 
-                                              step   Reward 
- Prompt                   Action                                                    ... Rewards 
-                                                    Extra info 
-                                                                                    ... Log probs 
-             Agent       Text Tool    Environment   Last action 
-                                                                                  Trajectory 
-                                                     Transition

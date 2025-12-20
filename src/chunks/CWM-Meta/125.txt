@@ -1,3 +1,0 @@
-Training. GPUs are divided into a set of workers that continuously perform rollouts and trainers that update 
-the current policy. Workers send batches of trajectories to the trainers as soon as they are completed and 
-   7 See Async tensor parallelism in PyTorch with TorchTitan. 8Enabled by setting torch ._ functorch.config.

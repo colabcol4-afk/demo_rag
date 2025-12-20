@@ -1,6 +1,0 @@
-The key function here is ... But wait, where 
-                                             is `_partial_`popped from the config ?... Let me outline the steps: ... Hold on, in 
-                  SWE RL                     the current code, `_recursive_`and `_convert_`are popped ... Looking at the code 
-                                             ... CWM (pre-RL)         SWE expert         if OmegaConf.is_dict(node): 
-                                                 convert = node[_Keys. CONVERT] ... Rejection       Hang on, but in the code flow, `_call_target' is called when the node has a 
-       (Joint) SFT           sampling        _target_` ...

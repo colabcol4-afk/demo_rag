@@ -1,16 +1,0 @@
-18 
-<<<
-
-Rehearsal & Local queue of worker batches                                                Agentic coding 
-                                                                                          Code 
-                                   Data transfer queue                                     Math 
-                                                             Traj 1 Traj 2    ... Traj 8   Agentic SWE 
-               1 
-                              Trainer batch of trajectory contexts 
-  R                        PAD 131k tokens with paddings    Worker batches 
-                              Online or rehearsal                           Execution & verification 
-              1                                                             locally remotely 
-
-   1    2   3    4    ... n        Model transfer queue        1    2   3    4   ... m 
-                                  Update & transfer model weights 
-          Trainer nodes                                              Worker nodes           Data sources

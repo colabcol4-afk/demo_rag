@@ -1,3 +1,0 @@
-Ours             128 turns               53.9       o1-mini-2024-09-12           Whole File 32.9 
-                                                     gpt-4.1-mini                 Diff       27.1 
-                                                     Codestral 25.01              Whole File 11.1

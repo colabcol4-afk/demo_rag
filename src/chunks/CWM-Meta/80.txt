@@ -1,14 +1,0 @@
-13 
-<<<
-
-                                 <tool: edit>       Custom plugin tools         Reasoning 
-                                 [path]              <tool: create> <tool: submit> <tool: ... >      Test Oracle 
-                   <tool: bash> <<<<<<< SEARCH                                                       suite patch 
-                   [command(s)] [search_lines]       [path]      [result]       Feedback 
-                   </tool>       =======             [content] </tool> </tool> 
-                                 [replacement_lines]                                         +       >       + 
-                   Executes bash >>>>>>> REPLACE                 Marks [result] <tool: submit> 
-                   [command(s)] in the </tool>       Creates a new       as 
- Issue   Agent     current session                   [content] file at [path] with submission your final Feedback Reward: tests or 
-                                 Replaces [search_lines] from                   Summary   Predicted patch patch similarity 
-                      Repo sandbox [path] with [replacement_lines]             Trajectory             (if tests fail)

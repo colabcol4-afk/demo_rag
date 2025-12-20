@@ -1,7 +1,0 @@
-All 
-training data are decontaminated against SWE-bench Verified at repository-level granularity, see §F. We estimate the difficulty of each instance using the pass@1 score from CWM SFT, calculated over at least 
-32 samples. Instances with a pass@1 above 95% are filtered out as easy, while those with a non-zero pass@1 
-are included in the primary dataset. Instances with a 0% pass@1 are placed in a secondary dataset that is 
-sampled less frequently at the beginning. To make these hard problems solvable, we augment their prompts 
-by adding the hidden test as a hint. This augmentation increases the pass@1 rate from 0% to approximately 
-30%. Later in training, we remove hints from hard instances so the model learns to solve them from scratch. Finally, this process yields 12.6 k unique training instances: 6.9 k in the primary set and 5.7k in the secondary. 5.3.2   Coding

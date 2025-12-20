@@ -1,9 +1,0 @@
-looking at the official benchmark leaderboard,14 CWM ranks second overall on time complexity prediction 
-(all@1) across all reported models of all sizes. For time complexity generation, CWM achieves the best overall 
-pass@1, best@1, and all@1 scores for our set of models, and also ranks second in general looking at the official 
-benchmark scores. For space complexity generation, our model ranks first for pass@1 on code only, and 
-second behind Qwen3-32B in terms of the remaining metrics. We note that CWM stands out in particular in 
-time complexity reasoning, systematically outperforming other models across all metrics on both prediction 
-and generation variants. Moreover, when complexity requirements are set aside, the model's performance 
-on code-only pass@1 degrades far less than for other models, indicating CWM is able to maintain focus on 
-fundamental task requirements while effectively handling additional constraints. 14See https://facebookresearch.github.io/BigOBench/leaderboard.html at the time of writing.

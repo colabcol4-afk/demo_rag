@@ -1,4 +1,0 @@
-Kunal Handa, Alex Tamkin, Miles McCain, Saffron Huang, Esin Durmus, Sarah Heck, Jared Mueller, Jerry Hong, 
-  Stuart Ritchie, Tim Belonax, et al. Which economic tasks are performed with ai? evidence from millions of claude 
-  conversations. arXiv preprint ar Xiv:2503.04761, 2025. Michael Hassid, Gabriel Synnaeve, Yossi Adi, and Roy Schwartz. Don't overthink it. preferring shorter thinking chains 
-  for improved Ilm reasoning. arXiv preprint ar Xiv:2505.17813, 2025.

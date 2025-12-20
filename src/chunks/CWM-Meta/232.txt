@@ -1,3 +1,0 @@
-Yunhao Tang, Kunhao Zheng, Gabriel Synnaeve, and Rémi Munos. Optimizing language models for inference 
-  time objectives using reinforcement learning. CoRR, abs/2503.19595, 2025. doi: 10.48550/ARXIV.2503.19595. https://doi.org/10.48550/arXiv.2503.19595. The Terminal-Bench Team. Terminal-bench: A benchmark for ai agents in terminal environments, Apr 2025. https://github.com/laude-institute/terminal-bench. Julien Vanegue, Jules Villard, Peter O'Hearn, and Azalea Raad. Non-termination proving: 100 million loc and beyond, 
-  2025. https://arxiv.org/abs/2509.05293.

@@ -1,9 +1,0 @@
-To avoid contamination, we filter out all repositories 
-(and their forks) that are used in SWE-bench. The tasks presented to the model can be categorized into two 
-groups: synthetic tasks and real-world tasks, which we call mutate-fix and issue-fix. Mutate-fix tasks. For mutate-fix tasks, we start with a working codebase and then synthetically introduce a 
-bug for the agent to fix. We begin by identifying functions (and methods - omitted for brevity below) that 
-can be verified using the repository test suite. As a first step, we filter these functions to the subset for which 
-all unit tests pass successfully. We then consider the following set of mutations to synthetically introduce a 
-bug into these functions: 
-      Functions: remove either a portion of the function or the entire function. Arguments: remove arguments from the function definition or randomly re-order function call arguments. · Variables: sample a pair of variables in the function and swap all their occurrences. · Statements: remove an import or return statement. · Operators: replace operators (binary, unary, or boolean) in statements in the function. 5 
-<<<

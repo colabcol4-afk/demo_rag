@@ -1,4 +1,0 @@
-See Figure 13 for an illustration of this process. 6    Code and infrastructure 
-
-This section discusses details of our training pipeline, including efficiency-related features leveraged for CWM 
-training and the asynchronous RL architecture.

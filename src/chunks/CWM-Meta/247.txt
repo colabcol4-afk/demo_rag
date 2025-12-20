@@ -1,2 +1,0 @@
-Only after this verification, the agent submits the patch and generates a summary. Lastly, Figure B.21 shows the default SWE RL setting where CWM is paired with the edit tool. In 
-this example, CWM performs extensive reasoning before making the edit.

@@ -1,2 +1,0 @@
-Niklas Muennighoff, Alexander Rush, Boaz Barak, Teven Le Scao, Nouamane Tazi, Aleksandra Piktus, Sampo Pyysalo, 
-  Thomas Wolf, and Colin A Raffel. Scaling data-constrained language models.

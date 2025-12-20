@@ -1,4 +1,0 @@
-We also observe good generalization performance across the six languages tested in the benchmark, as shown 
-in Figure 17b. Many top-performing models, such as 03-pro (84.9%) (OpenAI, 2025b), DeepSeek R1 (71.4%), 
-and Qwen3 235B (59.6%), achieve substantially higher scores using the "diff" edit format. However, CWM 
-was not optimized for this format and does not reach competitive performance with it.

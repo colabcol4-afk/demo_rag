@@ -1,6 +1,0 @@
-reasoning mode can be activated by injecting <| reasoning_thinking_start |> into the beginning of assistant 
-responses. Note that we discontinue the use of these reasoning tokens during RL as explained in §5.3. 5.2   RL algorithm 
-We use a variant of Group Relative Policy Optimization (GRPO) to train CWM (Shao et al., 2024). GRPO 
-is a policy gradient method that uses the PPO loss (Schulman et al., 2017) in combination with Monte Carlo 
-value estimation instead of a value model, as used in PPO. Many works have proposed improvements to and 
-fixes of GRPO (Yu et al., 2025; Liu et al., 2025; Hu et al., 2025; Mistral-AI et al., 2025). We incorporate

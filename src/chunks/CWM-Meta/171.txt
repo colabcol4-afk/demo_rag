@@ -1,1 +1,0 @@
-15 For LCBv5, we report results starting from October to be consistent with the numbers reported by Qwen3.

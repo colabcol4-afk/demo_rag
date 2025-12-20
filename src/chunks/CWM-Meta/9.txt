@@ -1,4 +1,0 @@
-models can be used to leverage reasoning and planning to improve code generation. To this end, we release 
-both the final weights and intermediate checkpoints under a noncommercial research license. Given CWM's 
-competitive performance, we conducted a preparedness assessment which concluded that CWM is unlikely to 
-increase catastrophic risks beyond those present in the current model ecosystem.1

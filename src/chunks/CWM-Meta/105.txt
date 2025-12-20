@@ -1,9 +1,0 @@
-5.3.4    Mathematics 
-
-Design. Although not the main focus on this research work, we consider mathematical reasoning as another 
-RL task to further strengthen and generalize CWM's reasoning capabilities. We restrict these problems to 
-questions that have definitive and easy to verify answers. Both the questions and answers are formulated in 
-LATEX, similar to much of the math content found on the web. We also include a tool-enabled version of the math environment, adhering to the format described in §H. Here, 
-the agent may invoke the Python interpreter with custom code. Standard output and error contents will form 
-the next observation and the agent is prompted to continue solving the task. We impose a limit of 4 tool calls 
-per episode and a 10s timeout per call. The prompt template shares its system prompt with the coding environment but differs in the user prompt. As shown in Figure 10, the user prompt instructs the agent to place the final answer inside a LATEX box. Reward.

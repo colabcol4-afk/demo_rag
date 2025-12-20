@@ -1,7 +1,0 @@
-B   CWM Examples 
-
-Extending §3, we here present additional examples of using CWM for SWE reasoning, trace prediction, and a 
-combination of the two. Reasoning agent. Figure B.19 shows an example of CWM solving an SWE-bench Verified problem in a 
-bash-only environment, which is more challenging than environments that provide dedicated tools for common 
-tasks such as file editing. In this example, the model makes incorrect edits in the initial turns but realizes its 
-error and restores the original file state using git checkout, followed by producing a correct edit with sed. Figure B.20 demonstrates that CWM can leverage test execution to verify patch correctness before submission. In this specific example, the agent makes sure that the changes it makes do not break any existing functionality.

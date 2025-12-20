@@ -1,6 +1,0 @@
-Zichen Liu, Changyu Chen, Wenjun Li, Penghui Qi, Tianyu Pang, Chao Du, Wee Sun Lee, and Min Lin. Understanding 
-  r1-zero-like training: A critical perspective. arXiv preprint ar Xiv:2503.20783, 2025. Ilya Loshchilov and Frank Hutter. Decoupled weight decay regularization. In International Conference on Learning 
-  Representations, 2019. https://openreview.net/forum?id=Bkg6RiCqY7. The mathlib Community. The lean mathematical library. In Proceedings of the 9th ACM SIGPLAN International 
-  Conference on Certified Programs and Proofs, CPP 2020, page 367-381, New York, NY, USA, 2020. Association for 
-  Computing Machinery. ISBN 9781450370974. doi: 10.1145/3372885.3373824. https://doi.org/10.1145/3372885. 3373824. Vegard Mella. Moodist, 2025. https://github.com/facebookresearch/moodist. Mentat AI Team. Locodiff-bench: Natural long-context code benchmark, 2025. https://github.com/AbanteAI/ 
-  LoCoDiff-bench.

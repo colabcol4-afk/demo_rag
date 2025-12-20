@@ -1,5 +1,0 @@
-Dheeru Dua, Yizhong Wang, Pradeep Dasigi, Gabriel Stanovsky, Sameer Singh, and Matt Gardner. DROP: A reading 
-  comprehension benchmark requiring discrete reasoning over paragraphs. In Jill Burstein, Christy Doran, and 
-  Thamar Solorio, editors, Proceedings of the 2019 Conference of the North American Chapter of the Association for 
-  Computational Linguistics: Human Language Technologies, NAACL-HLT 2019, Minneapolis, MN, USA, June 2-7, 
-  2019, Volume 1 (Long and Short Papers), pages 2368-2378.

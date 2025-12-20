@@ -1,4 +1,0 @@
-Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng, Cody Hao Yu, Joseph E. Gonzalez, Hao 
-  Zhang, and Ion Stoica. Efficient memory management for large language model serving with pagedattention. In 
-  Proceedings of the ACM SIGOPS 29th Symposium on Operating Systems Principles, 2023. 37 
-<<<

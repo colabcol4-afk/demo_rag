@@ -1,4 +1,0 @@
-code that is being executed). The frame, action, and argument separators, as well as the trace context start 
-indicator, are represented using custom tokens. We refer the reader to §B for trace prediction examples and 
- SH for a specification of this trace representation format. We re-use both the tracing app and trace formatting 
-for all other execution trace data described in the remainder of this section. CodeContests solutions tracing.

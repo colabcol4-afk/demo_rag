@@ -1,12 +1,0 @@
-Lastly, while we are excited about the opportunities that world modeling affords, these are only our first 
-steps in this direction. Our code world modeling dataset collection efforts focus on explicit Python execution, 
-and expanding this set to include other programming languages or symbolic execution is left for future 
-work. Robust ways to leverage world model knowledge to improve performance across a variety of tasks via 
-prompting or fine tuning is a ripe area for research. Similarly, planning with code world models, either using 
-formal inference frameworks or informally during reasoning, is an exciting direction for research and core to 
-our motivation for building CWM in the first place. In some sense, one might compare the current state of 
-CWMs to LLMs before CoT (Wei et al., 2023): the capabilities are there, we just need to find out how to 
-make the most of them. 18 Code World Model Preparedness Report, available at https: //ai.meta. com/research/publications/cwm-preparedness. 19 See https://www.llama.com/llama-protections. 32 
-<<<
-
-9    Conclusion

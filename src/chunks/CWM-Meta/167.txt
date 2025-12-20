@@ -1,13 +1,0 @@
-29 
-<<<
-
-Table 12 Agentic, code, and mathematical reasoning benchmarks. We compare CWM to baselines with roughly the 
-same number of parameters.(    LCB results for gpt-oss-20B (high) suffered from repeated time-outs due to repetitive 
-reasoning, despite our prompt-tuning efforts - which boosted gpt-oss (low/medium) scores by about 10 %.) 
-
-                      Magistral-small-1.2-24B    Qwen3-32B      gpt-oss-20B (low / med / high)   CWM 
-         LCBv5                  70.0                 65.7             54.2 / 66.9 1               68.6 
-         LCBv6                  61.6                 61.9             47.3 / 62.0 / _t            63.5 
-         Math-500                 -                  97.2                      -                  96.6 
-          AIME24                86.1                 81.4             42.1 / 80.0 / 92.1          76.0 
-          AIME25                77.3                 72.9             37.1 / 72.1 / 91.7          68.2

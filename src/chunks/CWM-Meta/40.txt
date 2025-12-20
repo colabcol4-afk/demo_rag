@@ -1,5 +1,0 @@
-.cpp 
- #include <bits/stdc++.h> 
- using namespace std; 
-
- bool is_evenly_separated(const string& s) { ... Figure 4      Example of CWM solving a competitive programming problem in agentic fashion.

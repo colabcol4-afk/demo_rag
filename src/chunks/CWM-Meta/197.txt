@@ -1,4 +1,0 @@
-Chris Cummins, Volker Seeker, Dejan Grubisic, Baptiste Roziere, Jonas Gehring, Gabriel Synnaeve, and Hugh Leather. Meta large language model compiler: Foundation models of compiler optimization. arXiv preprint ar Xiv:2407.02524, 
-  2024. Tri Dao. FlashAttention-2: Faster attention with better parallelism and work partitioning. In International Conference 
-  on Learning Representations (ICLR), 2024. Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, and Christopher Ré. FlashAttention: Fast and memory-efficient 
-  exact attention with IO-awareness. In Advances in Neural Information Processing Systems (NeurIPS), 2022. Edsger W. Dijkstra. A Discipline of Programming. Prentice-Hall, 1976. ISBN 013215871X. https://www.worldcat. org/oclc/01958445.

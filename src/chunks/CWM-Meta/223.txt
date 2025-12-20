@@ -1,3 +1,0 @@
-Advances in Neural Information 
-  Processing Systems, 36:50358-50376, 2023. OpenAI. Learning to reason with Ilms, September 2024. https: //openai.com/index/learning-to-reason-with-11ms/. OpenAI. gpt-oss-120b & gpt-oss-20b model card. arXiv preprint ar Xiv:2508.10925, 2025a. OpenAI. Claude 3.7 sonnet and claude code, April 2025b. Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini 
-  Agarwal, Katarina Slama, Alex Ray, et al. Training language models to follow instructions with human feedback. Advances in neural information processing systems, 35:27730-27744, 2022. Sahan Paliskara and Mark Saroufim. Kernelbook, 5 2025. https://huggingface.co/datasets/GPUMODE/KernelBook.

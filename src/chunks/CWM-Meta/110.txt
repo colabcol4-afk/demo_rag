@@ -1,9 +1,0 @@
-Figure 12 Async RL systems overview. Worker nodes generate trajectory batches from multiple RL environments and 
-send them to trainer nodes via a transfer queue. Trainer nodes form training batches either from worker-provided data 
-or the rehearsal mix, packing trajectories up to the maximum context length for a single gradient update. Environment 
-execution and verification can occur locally on worker nodes or remotely on another cluster or in the cloud. 5.4   Joint RL 
-Finally, we train CWM using all of the above-mentioned RL tasks. As shown in Figure 12, joint RL uses 
-our asynchronous RL infrastructure: worker nodes generate G trajectories per prompt from multiple RL 
-environments and send them to trainer nodes through the data transfer queue. The trainer nodes then 
-form training batches either from these worker-provided batches or directly from the SFT datamix (§5.1) for 
-rehearsal. We refer to §6.2 for further detail on engineering aspects of our asynchronous RL infrastructure.

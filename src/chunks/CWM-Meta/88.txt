@@ -1,3 +1,0 @@
-For example, the prompt shown in 
-Figure 8 asks the agent to " ... thoroughly explore the codebase, think hard, and leverage significant execution to 
-verify correctness by writing comprehensive tests to validate your solution ...

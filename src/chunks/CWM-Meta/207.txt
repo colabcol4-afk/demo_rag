@@ -1,4 +1,0 @@
-Naman Jain, King Han, Alex Gu, Wen-Ding Li, Fanjia Yan, Tianjun Zhang, Sida Wang, Armando Solar-Lezama, 
-  Koushik Sen, and Ion Stoica. Livecodebench: Holistic and contamination free evaluation of large language models 
-  for code. In The Thirteenth International Conference on Learning Representations, ICLR 2025, Singapore, April 
-  24-28, 2025. OpenReview.net, 2025a. https://openreview.net/forum?id=chfJJYC3iL.

@@ -1,7 +1,0 @@
-reasoning that is compatible with Llama3-70B. As a reference, we also provide the scores of a constant classifier 
- tagging all programs as terminating, which would obtain a pass@ of 0.5. When comparing CWM and Qwen3, 
- results suggest Qwen3 reaches better direct and CoT performance, however under the reasoning setup, both 
- models significantly improved, reaching comparable performance of ~0.94 pass@1. We initially designed HaltEval-prelim under the assumption that termination would be difficult to assess, given 
- its undecidability. The strong results achieved by both CWM and Qwen3-32B with reasoning were therefore un- 
-  13See https://sv-comp.sosy-lab.org/ and https://termination-portal.org/wiki/TPDB. 28 
-<<<

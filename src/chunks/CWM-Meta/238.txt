@@ -1,5 +1,0 @@
-Qiying Yu, Zheng Zhang, Ruofei Zhu, Yufeng Yuan, Xiaochen Zuo, Yu Yue, Tiantian Fan, Gaohong Liu, Lingjun Liu, 
-  Xin Liu, et al. Dapo: An open-source Ilm reinforcement learning system at scale. arXiv preprint ar Xiv:2503.14476, 
-  2025. Albert S. Yue, Lovish Madaan, Ted Moskovitz, DJ Strouse, and Aaditya K. Singh. HARP: A challenging human- 
-  annotated math reasoning benchmark. CoRR, abs/2412.08819, 2024. doi: 10.48550/ARXIV.2412.08819. https: 
-  //doi.org/10.48550/arXiv. 2412.08819.

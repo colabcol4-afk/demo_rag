@@ -1,8 +1,0 @@
-We implemented 
-this optimization by-hand for the matrix multiplication needed to compute w. grad during the backward pass 
-(sharded along the reduction dimension), as there is no defacto support in PyTorch. fp8 with tensor parallelism. When TP is enabled, we adapted our fp8 recipe to further improve performance. We use "sub-row-wise" scaling where appropriate to align quantization boundaries with TP shards, which both 
-avoids communication and improves accuracy. We perform all-gathers in fp8, which improves throughput and 
-also enables fusing quantization into previous kernels (e.g., LayerNorm). During the backward pass, however, 
-we sometimes all-gather the same data twice (once in fp8 and once in bf16, since it will be consumed by two 
-separate matmuls, one for each dtype). Because of Async-TP, however, this adds zero overhead and enables 
-fusing quantization into previous kernels.

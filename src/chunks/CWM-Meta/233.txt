@@ -1,6 +1,0 @@
-Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia 
-  Polosukhin. Attention is all you need. Advances in neural information processing systems, 30, 2017. Shibo Wang, Jinliang Wei, Amit Sabne, Andy Davis, Berkin Ilbeyi, Blake Hechtman, Dehao Chen, Karthik Srinivasa 
-  Murthy, Marcello Maggioni, Qiao Zhang, et al. Overlap communication with dependent computation via decompo- 
-  sition in large deep learning models. In Proceedings of the 28th ACM International Conference on Architectural 
-  Support for Programming Languages and Operating Systems, Volume 1, pages 93-106, 2022a. Xingyao Wang, Boxuan Li, Yufan Song, Frank F. Xu, Xianu Tang, Mingchen Zhuge, Jiayi Pan, Yueqi Song, Bowen Li, 
-  Jaskirat Singh, Hoang H.

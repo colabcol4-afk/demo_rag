@@ -1,4 +1,0 @@
-Figure 17 (a) Test time scaling (TTS) with both our best@k method majority voting can significantly increase pass@1 
-rates for CWM on SWE-bench Verified. (b) Accuracy of CWM on Aider Polyglot by programming language using 
-the whole file edit format. 25 
-<<<

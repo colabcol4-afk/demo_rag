@@ -1,6 +1,0 @@
-We post-process raw traces in two steps. First, we "episodify" our traces, extracting function-level traces from 
-raw pytest traces with configurable stack depth and stochastic step-in probability. When stochastic step-in 
-occurs, function calls are probabilistically included in their parent trace rather than a separate episode to 
-simulate variable execution depth. In a second step, we then gather and compress the source code context 
-from the target repository that is necessary for predicting the observation-action trajectory. To the resulting 
-context-trace pair, we then apply the same CWM formatting as before.

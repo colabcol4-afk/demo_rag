@@ -1,14 +1,0 @@
-Data self-bootstrapping. In SWE RL, CWM is required to solve software issues as a reasoning agent (i.e., 
-through both reasoning and tool use). However, such data does not exist in the public and the format is 
-completely new to the model before RL and different to our ForagerAgent data, so early iterations of our 
-model struggled to interact with the software environment across long horizons without making format errors. To address this, we perform an iterative self-bootstrapping process to collect high-quality agentic reasoning 
-traces and supply them back to the joint SFT stage so that CWM can have a better prior distribution before 
-RL. This process not only helps with format adherence but also significantly improves our model's software 
-engineering capability both before and after RL. As shown in Figure 9, we start from a pre-RL CWM checkpoint (not the final CWM SFT) that has not 
-been SFT-ed on any SWE trajectories in the reasoning agent format. Over three main iterations, we perform 
-RL and use the RL-ed model (i.e., the SWE expert in the figure) to do rejection sampling. We then select 
-high-quality traces from the rejection samples using custom heuristics (e.g., long trajectories that pass all 
-hidden tests without any tool use errors). Next, we perform SFT with this data on top of the original model. This filtering helps reduce biases that RL fails to eliminate, such as the tendency to make editing mistakes. 15 
-<<<
-
-                                             <think> The instantiation logic is in ...

@@ -1,6 +1,0 @@
-Next, we evaluate CWM and compare its performance against relevant baselines, focusing 
-on coding and mathematical reasoning tasks. We consider agentic evaluation for coding tasks, together 
-with additional computation-oriented evaluations covering (i) output prediction with execution traces and 
-reasoning, (ii) full execution trace prediction, (iii) program termination prediction, and (iv) prediction and 
-generation of algorithmic complexity. Finally, we evaluate CWM considering established benchmarks for 
-competitive programming, mathematical reasoning, non-reasoning evaluation, and long-context.

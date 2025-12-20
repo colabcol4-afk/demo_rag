@@ -1,3 +1,0 @@
-using 1164 tokens on average compared to 497 tokens for full trace prediction. We also report results for 
-CWM after SFT, which achieves its best result of 87.3% using full execution trace prediction. Single-step 
-trace prediction is not competitive with classic few-shot prompting for either CWM model. Execution trace prediction analysis.

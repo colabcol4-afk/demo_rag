@@ -1,10 +1,0 @@
-< | frame_sep|>) as 
-such. 8 
-<<<
-
-We refer to §B for additional example trajectories from CWM, including self-correcting SWE behavior, a 
-comparison of the advantages and disadvantages of strict trace prediction compared to natural language 
-(and why we think their combination is worth exploring), further demonstrations of how we can adapt trace 
-prediction to elicit code generation, and an example of using CWM to predict program termination. 4    CWM: architecture, pre-training, and scaling laws 
-
-We next share details on the CWM architecture, final pre-training recipe, and scaling law experiments. Specific details about our efficient training infrastructure can be found in §6. 4.1   Architecture and hyper-parameters

@@ -1,6 +1,0 @@
-Dan Hendrycks, Steven Basart, Saurav Kadavath, Mantas Mazeika, Akul Arora, Ethan Guo, Collin Burns, Samir 
-  Puranik, Horace He, Dawn Song, et al. Measuring coding challenge competence with apps. ar Xiv preprint 
-  ar Xiv:2105.09938, 2021a. Dan Hendrycks, Collin Burns, Saurav Kadavath, Akul Arora, Steven Basart, Eric Tang, Dawn Song, and Jacob Stein- 
-  hardt. Measuring mathematical problem solving with the MATH dataset. In Joaquin Vanschoren and Sai-Kit Yeung, 
-  editors, Proceedings of the Neural Information Processing Systems Track on Datasets and Benchmarks 1, NeurIPS 
-  Datasets and Benchmarks 2021, December 2021, virtual, 2021b. https://datasets-benchmarks-proceedings. neurips.cc/paper/2021/hash/be83ab3ecd0db773eb2dc1b0a17836a1-Abstract-round2.html. C. A. R. Hoare. Proof of a program: FIND. Commun. ACM, 14(1):39-45, 1971. doi: 10.1145/362452.362489. https://doi.org/10.1145/362452.362489.

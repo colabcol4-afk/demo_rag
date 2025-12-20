@@ -1,15 +1,0 @@
-After decontamination (see §F), the final code RL dataset has 81 k prompts. 5.3.3 Agentic coding 
- The agentic coding environment combines the reasoning and tool use features of the SWE RL environment 
- (§5.3.1) with the competitive programming setup described in §5.3.2. The user prompt is customized for 
- solving competitive programming tasks and explicitly asks the agent to write and run tests to check and 
- improve the solution, as illustrated in Figure 11. Different from SWE RL, there is no submit tool in this 
-   6https: //github.com/serega/gaoya 
-
-                                                  17 
-<<<
-
- ... work on the following competitive programming question and provide a {lang} solution: < question> {question} </question> 
- Your final response should (1) summarize your approach ... and (2) wrap your final code solution in a markdown code block, like: 
- [summary here ] 
-
- [your ... final solution here]

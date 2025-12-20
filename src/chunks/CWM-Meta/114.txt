@@ -1,5 +1,0 @@
-the challenging SWE subset and oversample it in a 4 : 1 ratio when plugins are used, and reverse this 
-     ratio when plugins are disabled. Competitive programming and SWE datasources are filtered to include 
-     instances with a solve rate in [0.1, 0.7] only in order to to maximize the learning signal. For math tasks, 
-     we enable Python tool calling for 2% of the total datamix. At 16 500 steps, we apply filtering based on solve rate with the [0.1, 0.7] interval to our math dataset 
-     as well. For SWE data, we create fine-grained subsets for each 0.1 solve-rate interval from (0.0, 0.7],

@@ -1,3 +1,0 @@
-CWM: An Open-Weights LLM for Research on Code 
-    Generation with World Models 
-    Meta FAIR CodeGen Team

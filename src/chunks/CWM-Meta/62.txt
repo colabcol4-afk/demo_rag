@@ -1,4 +1,0 @@
-3 Note that our "local" attention blocks are therefore effectively global during pre-training. 4We have observed lackluster performance when training on long-context data at smaller batch sizes. We speculate that 
-increasing the batch size (in tokens) is beneficial for training on long-context data, as the decrease in the number of documents 
-contained in each batch increases the variance in our gradient estimate. 10 
-<<<

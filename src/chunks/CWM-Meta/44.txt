@@ -1,2 +1,0 @@
-Your execution trace prediction format MUST follow this structure: 
- 1. The execution trace prediction starts with the <| trace_context_start|> token and ends with a final <| frame_sep|> token. 2.

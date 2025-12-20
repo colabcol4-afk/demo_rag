@@ -1,4 +1,0 @@
-Naman Jain, Jaskirat Singh, Manish Shetty, Liang Zheng, Koushik Sen, and Ion Stoica. R2e-gym: Procedural 
-  environments and hybrid verifiers for scaling open-weights swe agents. arXiv preprint ar Xiv:2504.07164, 2025b. Carlos E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir Press, and Karthik R. Narasimhan. Swe-bench: Can language models resolve real-world github issues? In The Twelfth International Conference 
-  on Learning Representations, ICLR 2024, Vienna, Austria, May 7-11, 2024. OpenReview.net, 2024. https: 
-  //openreview. net/forum?id=VTF8yNQM66.

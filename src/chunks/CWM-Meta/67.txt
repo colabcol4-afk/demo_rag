@@ -1,3 +1,0 @@
-We 
-refer to   for further detail. Recent LLMs are trained beyond data-optimal regimes (Dubey et al., 2024) to optimize inference costs and 
-produce smaller yet capable models. Gadre et al.

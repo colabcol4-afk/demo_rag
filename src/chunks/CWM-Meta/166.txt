@@ -1,6 +1,0 @@
-29 
-<<<
-
-Table 12 Agentic, code, and mathematical reasoning benchmarks. We compare CWM to baselines with roughly the 
-same number of parameters.(    LCB results for gpt-oss-20B (high) suffered from repeated time-outs due to repetitive 
-reasoning, despite our prompt-tuning efforts - which boosted gpt-oss (low/medium) scores by about 10 %.)

@@ -1,3 +1,0 @@
-Code & Complexity - pass@1      24.1         25.5                17.7             14.6 
-          Code & Complexity - best@1      36.6         39.6                26.3            20.6 
-          Code & Complexity - all@1        3.2           5.1                2.4              1.5

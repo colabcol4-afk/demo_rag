@@ -1,2 +1,0 @@
-is automatically run at test-execution time. This fixture captures the build state of the container running unit 
-tests. We then commit and push the resulting image from each repository, as further detailed in §D.

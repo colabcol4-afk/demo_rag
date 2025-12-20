@@ -1,6 +1,0 @@
-We reuse the executable repository images from our mid-training data generation 
-efforts (§2.1). Since issue solving requires additional metadata (e.g., issue text, base commit hashes, and 
-diff patches), we join these repositories with publicly available issue and pull request metadata to create 
-repository-issue pairs. The git log history enables us to create one-to-many repository-issue pairs. We also 
-include publicly available training data such as SWE-Gym (Pan et al., 2025) and R2E-Gym (Jain et al., 
-2025b), further filtered by us for quality (e.g., removing non-verifiable instances whose tests cannot pass).

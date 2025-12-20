@@ -1,8 +1,0 @@
-No length normalization: As noted by Liu et al. (2025), dividing the loss by the trajectory length as 
-      done in GRPO leads to a length bias, whereby the agent is incentivized to increase the length on hard 
-      problems so as to lower the average loss. To avoid this bias, we divide by the maximum number of 
-      tokens in a trajectory, which matches the maximum context size of our model N = 131072. Batching strategy: We batch by a maximum token limit instead of the common approach that keeps 
-      a fixed number of trajectories per batch. This change aims at improving efficiency and to stabilize 
-      training by lowering the variance in batch size between different optimization steps - this is important in 
-      combination with our removal of length normalization. As a result, different trajectories that belong to 
-      the same group might contribute to separate optimization steps.

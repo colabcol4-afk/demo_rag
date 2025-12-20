@@ -1,3 +1,0 @@
-Wasi Uddin Ahmad, Sean Narenthiran, Somshubra Majumdar, Aleksander Ficek, Siddhartha Jain, Jocelyn Huang, 
-  Vahid Noroozi, and Boris Ginsburg. Opencodereasoning: Advancing data distillation for competitive coding. ar Xiv 
-  preprint ar Xiv:2504.01943, 2025. Aider Team. aider, 2025. https://github.com/Aider-AI/aider. GitHub repository; accessed 2025-08-18.

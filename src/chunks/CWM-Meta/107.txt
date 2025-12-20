@@ -1,4 +1,0 @@
-We gather math questions and answers from publicly available sources. To remove 
-duplicates, we use the MinHash LSH algorithm to identify similar problems and verify that they have the 
-same answer using our verifier. We also filter out problems that were solved correctly in all attempts (32 out 
-of 32) by our SFT model in non-reasoning mode.

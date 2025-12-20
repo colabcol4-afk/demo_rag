@@ -1,6 +1,0 @@
-training focuses strongly on code generation and reasoning with code. Thus, our models may be lacking in 
-other domains such as factual knowledge or classic natural language tasks. CWM is not trained for use as a general-purpose assistant or chat model and has not been aligned on, or fully 
-evaluated for, content risks. We make available system level protections - like Llama Guard, Prompt Guard, 
-and Code Shield - as a solution to help manage content generation in research environments.19 However, 
-these system level protections alone are unlikely to be sufficient to enable production uses of CWM and 
-further evaluations and fine-tuning may be required. CWM is intended to be used in English only.

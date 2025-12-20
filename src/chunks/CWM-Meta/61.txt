@@ -1,6 +1,0 @@
-Mid-training datamix. For mid-training, we introduce the ForagerAgent and Python execution tracing data, our 
-main CWM datasets introduced in §2, into the datamix. We additionally include code- and reasoning-related 
-data such as datasets derived from GitHub pull requests similar to SWE-RL (Wei et al., 2025), data from 
-compiler intermediate representations (Cummins et al., 2024), Triton PyTorch kernels similar to Paliskara 
-and Saroufim (2025), and formal mathematics in Lean covering statement and proof translation, as well as 
-world modeling (see §I). 2See https://github.com/openai/tiktoken.

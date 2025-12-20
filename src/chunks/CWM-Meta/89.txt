@@ -1,5 +1,0 @@
-", which it follows in its subsequent 
-actions. Notable differences from prior designs are that (1) our agent must generate the complete end-to-end 
-patch directly via git diff rather than relying on task-specific post-processing, and (2) it must also produce 
-a summary explaining how it resolves the issue, to improve clarity and usability. We also retain all reasoning 
-turns for logical coherence.

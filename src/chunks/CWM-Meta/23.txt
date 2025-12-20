@@ -1,13 +1,0 @@
-Generations are filtered to 
- ensure a balance of incorrect and correct submissions, leading to an overall count of 262 k. We trace these 
-solutions with inputs from the provided unit tests and filter out long traces with more than 10 k line events or 
-
-                                                  4 
-<<<
-
-large traces taking up more than 1 MB disk space, leaving us with 33 k effective code snippets and 70 k traces. Repository-level tracing. We also performed Python execution tracing for the unit tests of more than 21 k 
-available and traceable repository images. For a subset of these repositories, we use the repository's git log 
-to randomly select additional commits prior to our built commit. Since the build environment is configured 
-for the current commit's dependencies, older commits may fail to execute. We attempted tracing for up 
-to 40 historical commits per repository but capped successful traces at 4 commits per repository to avoid 
-over-representation of any single repository. This process resulted in around 70 k execution-traced commits.

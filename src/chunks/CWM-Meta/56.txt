@@ -1,8 +1,0 @@
-Model architecture. CWM is a 32-billion-parameter dense decoder-only model. We choose a dense architecture 
-over sparse alternatives for ease-of-use in downstream open source research. CWM uses an alternating pattern 
-of local and global attention blocks interleaved in a 3:1 ratio (see Figure 6a) with sliding window sizes of 
-8192 and 131 072 tokens respectively. Transformer blocks use Grouped-Query-Attention (Ainslie et al., 2023) 
-with 48 query heads and 8 key-value heads. We use SwiGLU activation functions (Shazeer, 2020), RMSNorm 
-(Zhang and Sennrich, 2019) with pre-normalization, Rotary Positional Embedding (RoPE) (Su et al., 2021), 
-and we train with full document-causal masking. To support long-context modeling, we follow Roziere et al. (2023); Xiong et al. (2023) and apply Scaled RoPE with          = 1 M and scale factor 16 from mid-training 
-onwards. We give a full overview of CWM parameters and architecture choices in Table 2. Training hyper-parameters.

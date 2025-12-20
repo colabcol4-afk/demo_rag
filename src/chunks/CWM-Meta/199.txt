@@ -1,4 +1,0 @@
-Association for Computational Linguistics, 2019. doi: 
-  10.18653/V1/N19-1246. https://doi.org/10.18653/v1/n19-1246. Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman, Akhil 
-  Mathur, Alan Schelten, Amy Yang, Angela Fan, et al. The llama 3 herd of models. ar Xiv e-prints, pages arXiv-2407, 
-  2024.
