@@ -10,6 +10,7 @@ from langchain_core.messages import AIMessage
 from langgraph.graph import StateGraph
 from langgraph.prebuilt import ToolNode
 from langgraph.runtime import Runtime
+from langgraph.checkpoint.memory import MemorySaver  # ADD THIS
 
 from react_agent.context import Context
 from react_agent.state import InputState, State
@@ -110,7 +111,13 @@ builder.add_conditional_edges(
 
 # Add a normal edge from `tools` to `call_model`
 # This creates a cycle: after using tools, we always return to the model
+
 builder.add_edge("tools", "call_model")
 
-# Compile the builder into an executable graph
-graph = builder.compile(name="ReAct Agent")
+# ============================================
+# SESSION MEMORY - ADD THESE 3 LINES
+# ============================================
+memory = MemorySaver()
+
+# Compile the builder into an executable graph with memory
+graph = builder.compile(checkpointer=memory, name="ReAct Agent")

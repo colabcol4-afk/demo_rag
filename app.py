@@ -2,12 +2,18 @@
 
 A professional interface for interacting with the LangGraph agent,
 managing documents, and monitoring RAG ingestion.
+
+Features:
+- Aceternity-style meteor animation effect for chat screen
+- Moon background for document processing sidebar
 """
 
 import asyncio
+import base64
 import os
 import subprocess
 import sys
+import uuid
 from datetime import datetime
 from pathlib import Path
 from typing import List
@@ -29,6 +35,8 @@ from react_agent.context import Context
 DATA_DIR = Path(__file__).parent / "src" / "data"
 INGESTION_SCRIPT = Path(__file__).parent / "src" / "rag" / "ingestion.py"
 TRACKING_FILE = Path(__file__).parent / "processed_documents.json"
+ASSETS_DIR = Path(__file__).parent / "assets"
+MOON_IMAGE_PATH = ASSETS_DIR / "moon.png"
 MAX_FILE_SIZE_MB = 3
 MAX_FILES_UPLOAD = 2
 QDRANT_COLLECTION_NAME = "document_chunks"
@@ -41,168 +49,741 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Custom CSS for professional styling
-st.markdown("""
+# Suggestion prompts for first-time users
+SUGGESTIONS = {
+    "📊 Analyze my documents": "Can you analyze all the documents I've uploaded and give me a summary?",
+    "🔍 Find specific information": "Help me find information about [topic] in my documents",
+    "💡 What can you do?": "What are your capabilities? What can you help me with?",
+    "🌤️ Check the weather": "What's the weather like today?",
+}
+
+
+def get_moon_image_base64():
+    """Load moon image and convert to base64 for CSS background."""
+    try:
+        if MOON_IMAGE_PATH.exists():
+            with open(MOON_IMAGE_PATH, "rb") as f:
+                return base64.b64encode(f.read()).decode()
+    except Exception:
+        pass
+    return None
+
+
+# Get moon image base64
+MOON_BASE64 = get_moon_image_base64()
+
+# Build sidebar background CSS based on whether moon image exists
+SIDEBAR_BG_CSS = ""
+if MOON_BASE64:
+    SIDEBAR_BG_CSS = f"""
+    /* Main sidebar container */
+    [data-testid="stSidebar"] {{
+        background-image: url('data:image/png;base64,{MOON_BASE64}') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: local !important;
+    }}
+    
+    /* Override ALL inner sidebar backgrounds */
+    [data-testid="stSidebar"] > div,
+    [data-testid="stSidebar"] > div > div,
+    [data-testid="stSidebar"] > div > div > div,
+    [data-testid="stSidebar"] [data-testid="stSidebarContent"],
+    [data-testid="stSidebar"] [data-testid="stSidebarUserContent"],
+    [data-testid="stSidebar"] section,
+    [data-testid="stSidebar"] section > div {{
+        background: transparent !important;
+        background-color: transparent !important;
+    }}
+    
+    /* Add semi-transparent overlay for readability */
+    [data-testid="stSidebar"]::before {{
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: rgba(10, 10, 15, 0.7) !important;
+        backdrop-filter: blur(3px) !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+    }}
+    
+    /* Ensure content is above the overlay */
+    [data-testid="stSidebar"] > div {{
+        position: relative !important;
+        z-index: 1 !important;
+    }}
+    
+    /* Style sidebar text for better contrast */
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {{
+        color: #fafafa !important;
+    }}
+    
+    [data-testid="stSidebar"] .stMarkdown {{
+        color: #fafafa !important;
+    }}
+    """
+else:
+    SIDEBAR_BG_CSS = """
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #0f0f23 0%, #1a1a3e 50%, #0d0d1a 100%) !important;
+    }
+    
+    [data-testid="stSidebar"] > div,
+    [data-testid="stSidebar"] > div > div,
+    [data-testid="stSidebar"] section,
+    [data-testid="stSidebar"] section > div {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+    """
+
+# Professional Dark Mode CSS - UI Styling with NEW COLOR PALETTE
+DARK_MODE_CSS = f"""
 <style>
-    /* Main theme colors */
-    :root {
-        --primary-color: #6366f1;
-        --secondary-color: #8b5cf6;
+    /* ============================================
+       PROFESSIONAL DARK THEME UI - NEW PALETTE
+       ============================================ */
+    
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    
+    :root {{
+        --primary-color: rgb(191, 9, 47);
+        --secondary-color: rgb(19, 36, 64);
+        --accent-blue: rgb(22, 71, 106);
+        --accent-teal: rgb(59, 151, 151);
         --success-color: #10b981;
         --warning-color: #f59e0b;
         --danger-color: #ef4444;
-        --bg-dark: #1e1b4b;
-        --bg-light: #f8fafc;
-    }
-
-    /* Custom header styling */
-    .main-header {
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-        padding: 2rem;
-        border-radius: 10px;
+        --bg-main: #0a0a0f;
+        --bg-secondary: #0f0f1a;
+        --bg-card: rgba(20, 20, 35, 0.8);
+        --text-primary: #fafafa;
+        --text-secondary: #94a3b8;
+        --border-color: rgba(191, 9, 47, 0.2);
+        --glow-color: rgba(191, 9, 47, 0.4);
+    }}
+    
+    /* Main app background - deep space black */
+    .main {{
+        background: radial-gradient(ellipse at top, #0f0f23 0%, #0a0a0f 50%, #050507 100%);
+        min-height: 100vh;
+    }}
+    
+    .stApp {{
+        background: radial-gradient(ellipse at top, #0f0f23 0%, #0a0a0f 50%, #050507 100%);
+    }}
+    
+    /* ============================================
+       SIDEBAR STYLING - Moon Background
+       ============================================ */
+    {SIDEBAR_BG_CSS}
+    
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {{
+        color: var(--text-primary);
+    }}
+    
+    /* ============================================
+       HEADER STYLING - NEW GRADIENT
+       ============================================ */
+    .main-header {{
+        background: linear-gradient(135deg, 
+            rgba(191, 9, 47, 0.9) 0%, 
+            rgba(22, 71, 106, 0.9) 50%,
+            rgba(59, 151, 151, 0.9) 100%
+        );
+        padding: 2rem 2.5rem;
+        border-radius: 16px;
         margin-bottom: 2rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .main-header h1 {
+        box-shadow: 
+            0 4px 20px rgba(191, 9, 47, 0.3),
+            0 0 40px rgba(22, 71, 106, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        position: relative;
+        z-index: 2;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }}
+    
+    .main-header h1 {{
         color: white;
         margin: 0;
-        font-size: 2.5rem;
-        font-weight: 700;
-    }
-
-    .main-header p {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }}
+    
+    .main-header p {{
         color: rgba(255, 255, 255, 0.9);
-        margin: 0.5rem 0 0 0;
-        font-size: 1.1rem;
-    }
-
-    /* File card styling */
-    .file-card {
-        background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
+        margin: 0.75rem 0 0 0;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 500;
+    }}
+    
+    /* ============================================
+       CHAT CONTAINER & MESSAGES
+       ============================================ */
+    .chat-container {{
+        max-width: 900px;
+        margin: 0 auto;
         padding: 1rem;
-        margin: 0.5rem 0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        position: relative;
+        z-index: 2;
+    }}
+    
+    [data-testid="stChatMessage"] {{
+        background: rgba(20, 20, 35, 0.85);
+        border: 1px solid rgba(22, 71, 106, 0.15);
+        border-radius: 16px;
+        padding: 1.25rem;
+        margin: 0.75rem 0;
+        backdrop-filter: blur(12px);
+        position: relative;
+        z-index: 2;
+        box-shadow: 
+            0 4px 16px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
         transition: all 0.3s ease;
-    }
-
-    .file-card:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }}
+    
+    [data-testid="stChatMessage"]:hover {{
+        border-color: rgba(59, 151, 151, 0.3);
+        box-shadow: 
+            0 8px 24px rgba(22, 71, 106, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }}
+    
+    /* ============================================
+       WELCOME SCREEN
+       ============================================ */
+    .welcome-container {{
+        text-align: center;
+        padding: 4rem 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }}
+    
+    .welcome-icon {{
+        font-size: 5rem;
+        margin-bottom: 1.5rem;
+        line-height: 1;
+        animation: float 4s ease-in-out infinite;
+        filter: drop-shadow(0 0 20px rgba(191, 9, 47, 0.5));
+    }}
+    
+    @keyframes float {{
+        0%, 100% {{ transform: translateY(0) rotate(0deg); }}
+        25% {{ transform: translateY(-8px) rotate(-2deg); }}
+        75% {{ transform: translateY(-4px) rotate(2deg); }}
+    }}
+    
+    .welcome-title {{
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.03em;
+        background: linear-gradient(135deg, #fff 0%, rgba(59, 151, 151, 0.8) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }}
+    
+    .welcome-subtitle {{
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+        margin-bottom: 2.5rem;
+        font-weight: 500;
+    }}
+    
+    /* ============================================
+       SUGGESTION PILLS
+       ============================================ */
+    .suggestion-container {{
+        text-align: center;
+        padding: 2rem 0;
+        position: relative;
+        z-index: 2;
+    }}
+    
+    .suggestion-title {{
+        color: var(--text-secondary);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+    }}
+    
+    [data-baseweb="tag"] {{
+        position: relative;
+        z-index: 2;
+        background: rgba(22, 71, 106, 0.1) !important;
+        border: 1px solid rgba(59, 151, 151, 0.3) !important;
+        transition: all 0.3s ease !important;
+    }}
+    
+    [data-baseweb="tag"]:hover {{
+        background: rgba(22, 71, 106, 0.2) !important;
+        border-color: rgba(59, 151, 151, 0.5) !important;
         transform: translateY(-2px);
-    }
-
-    .file-name {
+        box-shadow: 0 4px 12px rgba(59, 151, 151, 0.2);
+    }}
+    
+    /* ============================================
+       FILE CARD STYLING
+       ============================================ */
+    .file-card {{
+        background: rgba(20, 20, 35, 0.9);
+        border: 1px solid rgba(22, 71, 106, 0.2);
+        border-radius: 12px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(8px);
+    }}
+    
+    .file-card:hover {{
+        box-shadow: 
+            0 8px 24px rgba(0, 0, 0, 0.3),
+            0 0 20px rgba(59, 151, 151, 0.15);
+        transform: translateY(-3px);
+        border-color: rgba(59, 151, 151, 0.4);
+    }}
+    
+    .file-name {{
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-weight: 600;
-        color: #1e293b;
+        color: var(--text-primary);
         font-size: 0.95rem;
-    }
-
-    .file-meta {
-        color: #64748b;
-        font-size: 0.85rem;
+    }}
+    
+    .file-meta {{
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--text-secondary);
+        font-size: 0.8rem;
         margin-top: 0.25rem;
-    }
-
-    /* Chat message styling */
-    .user-message {
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-        color: white;
-        padding: 1rem;
-        border-radius: 10px;
-        margin: 0.5rem 0;
-        box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
-    }
-
-    .assistant-message {
-        background: white;
-        color: #1e293b;
-        padding: 1rem;
-        border-radius: 10px;
-        margin: 0.5rem 0;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Status badges */
-    .status-badge {
+    }}
+    
+    /* ============================================
+       STATUS BADGES
+       ============================================ */
+    .status-badge {{
         display: inline-block;
-        padding: 0.25rem 0.75rem;
+        padding: 0.3rem 0.85rem;
         border-radius: 9999px;
-        font-size: 0.85rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
         font-weight: 600;
-    }
-
-    .status-success {
-        background: #d1fae5;
-        color: #065f46;
-    }
-
-    .status-warning {
-        background: #fef3c7;
-        color: #92400e;
-    }
-
-    .status-info {
-        background: #dbeafe;
-        color: #1e40af;
-    }
-
-    /* Terminal output styling */
-    .terminal-output {
-        background: #1e293b;
+        letter-spacing: 0.02em;
+    }}
+    
+    .status-success {{
+        background: rgba(16, 185, 129, 0.15);
         color: #10b981;
-        font-family: 'Courier New', monospace;
-        padding: 1rem;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        max-height: 300px;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+    }}
+    
+    .status-warning {{
+        background: rgba(245, 158, 11, 0.15);
+        color: #f59e0b;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+    }}
+    
+    .status-info {{
+        background: rgba(59, 151, 151, 0.15);
+        color: rgb(59, 151, 151);
+        border: 1px solid rgba(59, 151, 151, 0.3);
+        box-shadow: 0 0 12px rgba(59, 151, 151, 0.2);
+    }}
+    
+    /* ============================================
+       TERMINAL OUTPUT
+       ============================================ */
+    .terminal-output {{
+        background: #0d0d12;
+        color: #10b981;
+        font-family: 'JetBrains Mono', monospace;
+        padding: 1.25rem;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        max-height: 350px;
         overflow-y: auto;
         margin: 1rem 0;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Sidebar styling */
-    .css-1d391kg {
-        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-    }
-
-    /* Button styling */
-    .stButton > button {
-        width: 100%;
-        border-radius: 8px;
-        font-weight: 600;
+        box-shadow: 
+            inset 0 2px 8px rgba(0, 0, 0, 0.5),
+            0 0 20px rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+    }}
+    
+    /* ============================================
+       STATS CARDS
+       ============================================ */
+    .stats-card {{
+        background: rgba(20, 20, 35, 0.9);
+        border-radius: 14px;
+        padding: 1.25rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        border-left: 4px solid rgb(191, 9, 47);
+        border: 1px solid rgba(22, 71, 106, 0.2);
+        backdrop-filter: blur(8px);
         transition: all 0.3s ease;
-    }
-
-    .stButton > button:hover {
+    }}
+    
+    .stats-card:hover {{
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Stats card */
-    .stats-card {
-        background: white;
-        border-radius: 10px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        border-left: 4px solid #6366f1;
-    }
-
-    .stats-number {
+        box-shadow: 
+            0 8px 24px rgba(0, 0, 0, 0.3),
+            0 0 20px rgba(59, 151, 151, 0.15);
+    }}
+    
+    .stats-number {{
+        font-family: 'JetBrains Mono', monospace;
         font-size: 2rem;
         font-weight: 700;
-        color: #6366f1;
-    }
-
-    .stats-label {
-        color: #64748b;
-        font-size: 0.9rem;
+        background: linear-gradient(135deg, rgb(191, 9, 47) 0%, rgb(59, 151, 151) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }}
+    
+    .stats-label {{
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
         margin-top: 0.25rem;
-    }
+        font-weight: 500;
+    }}
+    
+    /* ============================================
+       SESSION INFO
+       ============================================ */
+    .session-info {{
+        background: rgba(22, 71, 106, 0.08);
+        border: 1px solid rgba(59, 151, 151, 0.2);
+        border-radius: 12px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 0.85rem;
+        color: rgba(59, 151, 151, 0.9);
+        backdrop-filter: blur(4px);
+    }}
+    
+    .session-info code {{
+        font-family: 'JetBrains Mono', monospace;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 0.2rem 0.5rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+    }}
+    
+    /* ============================================
+       BUTTONS
+       ============================================ */
+    .stButton > button {{
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(22, 71, 106, 0.3);
+        position: relative;
+        z-index: 2;
+        background: rgba(22, 71, 106, 0.1);
+    }}
+    
+    .stButton > button:hover {{
+        transform: translateY(-2px);
+        box-shadow: 
+            0 8px 20px rgba(191, 9, 47, 0.25),
+            0 0 30px rgba(59, 151, 151, 0.15);
+        border-color: rgba(59, 151, 151, 0.5);
+        background: rgba(22, 71, 106, 0.2);
+    }}
+    
+    .stButton > button:active {{
+        transform: translateY(0);
+    }}
+    
+    /* ============================================
+       INPUT STYLING
+       ============================================ */
+    [data-testid="stChatInput"] {{
+        border-radius: 14px;
+        border: 1px solid rgba(22, 71, 106, 0.2);
+        background: rgba(20, 20, 35, 0.9);
+        backdrop-filter: blur(12px);
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }}
+    
+    [data-testid="stChatInput"]:focus-within {{
+        border-color: rgba(59, 151, 151, 0.5);
+        box-shadow: 
+            0 4px 16px rgba(0, 0, 0, 0.2),
+            0 0 20px rgba(59, 151, 151, 0.15);
+    }}
+    
+    /* ============================================
+       EXPANDER STYLING
+       ============================================ */
+    .streamlit-expanderHeader {{
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 600;
+        background: rgba(20, 20, 35, 0.8);
+        border-radius: 10px;
+        border: 1px solid rgba(22, 71, 106, 0.15);
+    }}
+    
+    /* ============================================
+       SCROLLBAR STYLING
+       ============================================ */
+    ::-webkit-scrollbar {{
+        width: 8px;
+        height: 8px;
+    }}
+    
+    ::-webkit-scrollbar-track {{
+        background: rgba(20, 20, 35, 0.5);
+        border-radius: 4px;
+    }}
+    
+    ::-webkit-scrollbar-thumb {{
+        background: linear-gradient(180deg, rgb(191, 9, 47) 0%, rgb(59, 151, 151) 100%);
+        border-radius: 4px;
+    }}
+    
+    ::-webkit-scrollbar-thumb:hover {{
+        background: linear-gradient(180deg, rgb(22, 71, 106) 0%, rgb(59, 151, 151) 100%);
+    }}
+    
+    /* ============================================
+       MAIN CONTENT Z-INDEX
+       ============================================ */
+    .main > .block-container {{
+        position: relative;
+        z-index: 1;
+    }}
+    
+    /* Ensure all interactive elements are above meteors */
+    .stMarkdown, .stTextInput, .stSelectbox, .stMultiSelect, 
+    .stSlider, .stCheckbox, .stRadio, .stFileUploader {{
+        position: relative;
+        z-index: 2;
+    }}
 </style>
-""", unsafe_allow_html=True)
+"""
+
+# Meteors using pure CSS - Updated with new colors
+METEORS_HTML = """
+<div class="meteors-bg-container">
+    <div class="ambient-glow glow-1">&nbsp;</div>
+    <div class="ambient-glow glow-2">&nbsp;</div>
+    <div class="ambient-glow glow-3">&nbsp;</div>
+    <div class="meteor-effect m1">&nbsp;</div>
+    <div class="meteor-effect premium m2">&nbsp;</div>
+    <div class="meteor-effect teal m3">&nbsp;</div>
+    <div class="meteor-effect m4">&nbsp;</div>
+    <div class="meteor-effect premium m5">&nbsp;</div>
+    <div class="meteor-effect m6">&nbsp;</div>
+    <div class="meteor-effect teal m7">&nbsp;</div>
+    <div class="meteor-effect m8">&nbsp;</div>
+    <div class="meteor-effect premium m9">&nbsp;</div>
+    <div class="meteor-effect m10">&nbsp;</div>
+    <div class="meteor-effect m11">&nbsp;</div>
+    <div class="meteor-effect teal m12">&nbsp;</div>
+    <div class="meteor-effect premium m13">&nbsp;</div>
+    <div class="meteor-effect m14">&nbsp;</div>
+    <div class="meteor-effect m15">&nbsp;</div>
+    <div class="meteor-effect teal m16">&nbsp;</div>
+    <div class="meteor-effect m17">&nbsp;</div>
+    <div class="meteor-effect premium m18">&nbsp;</div>
+    <div class="meteor-effect m19">&nbsp;</div>
+    <div class="meteor-effect teal m20">&nbsp;</div>
+</div>
+
+<style>
+    /* ============================================
+       METEORS BACKGROUND CONTAINER
+       ============================================ */
+    .meteors-bg-container {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        overflow: hidden !important;
+        pointer-events: none !important;
+        z-index: 0 !important;
+    }
+    
+    /* ============================================
+       AMBIENT GLOW EFFECTS - NEW COLORS
+       ============================================ */
+    .ambient-glow {
+        position: absolute !important;
+        border-radius: 50% !important;
+        filter: blur(80px) !important;
+        opacity: 0.2 !important;
+        pointer-events: none !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+    }
+    
+    .glow-1 {
+        width: 400px !important;
+        height: 400px !important;
+        background: radial-gradient(circle, rgb(191, 9, 47) 0%, transparent 70%) !important;
+        top: -100px !important;
+        right: 10% !important;
+        animation: pulse-glow 8s ease-in-out infinite !important;
+    }
+    
+    .glow-2 {
+        width: 300px !important;
+        height: 300px !important;
+        background: radial-gradient(circle, rgb(22, 71, 106) 0%, transparent 70%) !important;
+        bottom: 10% !important;
+        left: 5% !important;
+        animation: pulse-glow 10s ease-in-out infinite reverse !important;
+    }
+    
+    .glow-3 {
+        width: 250px !important;
+        height: 250px !important;
+        background: radial-gradient(circle, rgb(59, 151, 151) 0%, transparent 70%) !important;
+        top: 40% !important;
+        right: 20% !important;
+        animation: pulse-glow 12s ease-in-out infinite !important;
+        opacity: 0.15 !important;
+    }
+    
+    @keyframes pulse-glow {
+        0%, 100% { opacity: 0.2; transform: scale(1); }
+        50% { opacity: 0.35; transform: scale(1.1); }
+    }
+    
+    /* ============================================
+       METEOR EFFECT - Updated Colors
+       ============================================ */
+    .meteor-effect {
+        position: absolute !important;
+        top: -5px !important;
+        width: 3px !important;
+        height: 3px !important;
+        border-radius: 50% !important;
+        background: #fff !important;
+        box-shadow: 
+            0 0 0 1px rgba(255, 255, 255, 0.1),
+            0 0 6px 2px rgba(191, 9, 47, 0.8),
+            0 0 15px 3px rgba(22, 71, 106, 0.5) !important;
+        transform: rotate(215deg) !important;
+        animation: meteor-fall linear infinite !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        color: transparent !important;
+    }
+    
+    /* Meteor gradient tail using box-shadow */
+    .meteor-effect::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 50% !important;
+        right: -2px !important;
+        width: 60px !important;
+        height: 2px !important;
+        transform: translateY(-50%) !important;
+        background: linear-gradient(90deg, 
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(191, 9, 47, 0.6) 30%,
+            rgba(22, 71, 106, 0.3) 60%,
+            transparent 100%
+        ) !important;
+        border-radius: 100% !important;
+    }
+    
+    /* Premium meteor - longer brighter tail */
+    .meteor-effect.premium::before {
+        width: 100px !important;
+        background: linear-gradient(90deg, 
+            rgba(255, 255, 255, 1) 0%,
+            rgba(59, 151, 151, 0.8) 25%,
+            rgba(191, 9, 47, 0.5) 50%,
+            transparent 100%
+        ) !important;
+    }
+    
+    /* Teal accent meteor */
+    .meteor-effect.teal {
+        box-shadow: 
+            0 0 0 1px rgba(255, 255, 255, 0.1),
+            0 0 6px 2px rgba(59, 151, 151, 0.8),
+            0 0 15px 3px rgba(59, 151, 151, 0.5) !important;
+    }
+    
+    .meteor-effect.teal::before {
+        background: linear-gradient(90deg, 
+            rgba(59, 151, 151, 1) 0%,
+            rgba(59, 151, 151, 0.6) 40%,
+            transparent 100%
+        ) !important;
+    }
+    
+    /* ============================================
+       METEOR ANIMATION
+       ============================================ */
+    @keyframes meteor-fall {
+        0% {
+            opacity: 1;
+            transform: rotate(215deg) translateX(0);
+        }
+        70% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            transform: rotate(215deg) translateX(-600px);
+        }
+    }
+    
+    /* Individual meteor positions and timings */
+    .m1 { left: 5% !important; animation-duration: 2.5s !important; animation-delay: 0s !important; }
+    .m2 { left: 12% !important; animation-duration: 4s !important; animation-delay: 0.3s !important; }
+    .m3 { left: 20% !important; animation-duration: 3s !important; animation-delay: 0.7s !important; }
+    .m4 { left: 28% !important; animation-duration: 4.5s !important; animation-delay: 1.1s !important; }
+    .m5 { left: 35% !important; animation-duration: 3.2s !important; animation-delay: 0.4s !important; }
+    .m6 { left: 42% !important; animation-duration: 3.8s !important; animation-delay: 1.4s !important; }
+    .m7 { left: 50% !important; animation-duration: 3s !important; animation-delay: 0.2s !important; }
+    .m8 { left: 58% !important; animation-duration: 4.2s !important; animation-delay: 0.8s !important; }
+    .m9 { left: 65% !important; animation-duration: 2.8s !important; animation-delay: 1.6s !important; }
+    .m10 { left: 72% !important; animation-duration: 3.5s !important; animation-delay: 0.5s !important; }
+    .m11 { left: 80% !important; animation-duration: 4.8s !important; animation-delay: 1.9s !important; }
+    .m12 { left: 88% !important; animation-duration: 3.3s !important; animation-delay: 1.0s !important; }
+    .m13 { left: 95% !important; animation-duration: 4s !important; animation-delay: 2.2s !important; }
+    .m14 { left: 8% !important; animation-duration: 3.6s !important; animation-delay: 2.5s !important; }
+    .m15 { left: 25% !important; animation-duration: 2.9s !important; animation-delay: 1.8s !important; }
+    .m16 { left: 38% !important; animation-duration: 4.3s !important; animation-delay: 2.8s !important; }
+    .m17 { left: 55% !important; animation-duration: 3.1s !important; animation-delay: 0.6s !important; }
+    .m18 { left: 68% !important; animation-duration: 3.7s !important; animation-delay: 2.1s !important; }
+    .m19 { left: 82% !important; animation-duration: 2.7s !important; animation-delay: 1.3s !important; }
+    .m20 { left: 92% !important; animation-duration: 4.1s !important; animation-delay: 0.9s !important; }
+</style>
+"""
 
 
 def initialize_session_state():
@@ -219,6 +800,14 @@ def initialize_session_state():
         st.session_state.ingestion_success = None
     if "ingestion_log_output" not in st.session_state:
         st.session_state.ingestion_log_output = []
+    if "thread_id" not in st.session_state:
+        st.session_state.thread_id = str(uuid.uuid4())
+    if "initial_question" not in st.session_state:
+        st.session_state.initial_question = None
+    if "selected_suggestion" not in st.session_state:
+        st.session_state.selected_suggestion = None
+    if "model_name" not in st.session_state:
+        st.session_state.model_name = "groq/openai/gpt-oss-120b"
 
 
 def get_files_in_data_dir() -> List[dict]:
@@ -287,7 +876,6 @@ def clear_processing_history() -> tuple[bool, str]:
             return True, "Successfully cleared processing history"
         else:
             return True, "No processing history to clear"
-
     except Exception as e:
         return False, f"Error clearing processing history: {str(e)}"
 
@@ -298,38 +886,32 @@ def clear_vector_store() -> tuple[bool, str]:
         from qdrant_client import QdrantClient
         from qdrant_client.http import models
 
-        # Get Qdrant credentials from environment
         qdrant_url = os.getenv("QDRANT_URL", "https://f58f1067-58c2-413d-acd3-8e6058389e20.us-east4-0.gcp.cloud.qdrant.io")
         qdrant_api_key = os.getenv("QDRANT_API_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.UvgYpKQ7MmBOsYDTXxSx-Pg_g5l0Ti-oDxgqG2I80SQ")
 
-        # Connect to Qdrant
         client = QdrantClient(
             url=qdrant_url,
             api_key=qdrant_api_key,
             prefer_grpc=True,
         )
 
-        # Check if collection exists
         collections = client.get_collections().collections
         collection_names = [col.name for col in collections]
 
         if QDRANT_COLLECTION_NAME not in collection_names:
             return False, f"Collection '{QDRANT_COLLECTION_NAME}' not found"
 
-        # Get point count before deletion
         info_before = client.get_collection(collection_name=QDRANT_COLLECTION_NAME)
         points_count = info_before.points_count
 
         if points_count == 0:
             return True, "Vector store is already empty"
 
-        # Delete all points by scrolling through IDs
         offset = None
         batch_size = 100
         total_deleted = 0
 
         while True:
-            # Scroll through points to get their IDs
             points, offset = client.scroll(
                 collection_name=QDRANT_COLLECTION_NAME,
                 limit=batch_size,
@@ -341,10 +923,8 @@ def clear_vector_store() -> tuple[bool, str]:
             if not points:
                 break
 
-            # Extract IDs
             point_ids = [point.id for point in points]
 
-            # Delete points by ID
             client.delete(
                 collection_name=QDRANT_COLLECTION_NAME,
                 points_selector=models.PointIdsList(
@@ -364,33 +944,22 @@ def clear_vector_store() -> tuple[bool, str]:
 
 
 def run_ingestion_script(log_container):
-    """Run the ingestion script and capture output in real-time.
-
-    Args:
-        log_container: Streamlit container to display logs in real-time
-    """
+    """Run the ingestion script and capture output in real-time."""
     st.session_state.ingestion_running = True
     st.session_state.ingestion_output = []
 
     try:
-        # Get the project root directory
         project_root = Path(__file__).parent
-
-        # Prepare environment variables - copy current env and ensure all are passed
         env = os.environ.copy()
-
-        # Run the ingestion script with proper environment and working directory
-        # Set PYTHONIOENCODING to handle emojis and unicode characters on Windows
         env['PYTHONIOENCODING'] = 'utf-8'
-        # Disable Python output buffering for immediate output
         env['PYTHONUNBUFFERED'] = '1'
 
         process = subprocess.Popen(
-            [sys.executable, "-u", str(INGESTION_SCRIPT), "--yes"],  # -u for unbuffered
+            [sys.executable, "-u", str(INGESTION_SCRIPT), "--yes"],
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,  # Capture stderr separately to see errors
+            stderr=subprocess.PIPE,
             text=True,
-            bufsize=0,  # Unbuffered
+            bufsize=0,
             universal_newlines=True,
             env=env,
             cwd=str(project_root),
@@ -398,43 +967,33 @@ def run_ingestion_script(log_container):
             errors='replace',
         )
 
-        # Capture output line by line in real-time
         output_lines = []
         error_lines = []
 
-        # Create a text area in the log container to show real-time output
         with log_container:
             log_display = st.empty()
             status_display = st.empty()
 
-            import select
             import time
 
-            # Read stdout and stderr in real-time
             while True:
-                # Read stdout
                 stdout_line = process.stdout.readline()
                 if stdout_line:
                     line = stdout_line.rstrip()
                     if line:
                         output_lines.append(line)
                         st.session_state.ingestion_output.append(line)
-                        # Update the display in real-time
-                        log_display.code('\n'.join(output_lines[-50:]), language='bash')  # Show last 50 lines
+                        log_display.code('\n'.join(output_lines[-50:]), language='bash')
 
-                # Read stderr
                 stderr_line = process.stderr.readline()
                 if stderr_line:
                     line = stderr_line.rstrip()
                     if line:
                         error_lines.append(f"[ERROR] {line}")
                         output_lines.append(f"[ERROR] {line}")
-                        # Update the display in real-time
                         log_display.code('\n'.join(output_lines[-50:]), language='bash')
 
-                # Check if process has finished
                 if process.poll() is not None:
-                    # Read any remaining output
                     remaining_stdout = process.stdout.read()
                     if remaining_stdout:
                         for line in remaining_stdout.split('\n'):
@@ -447,19 +1006,15 @@ def run_ingestion_script(log_container):
                             if line.strip():
                                 error_lines.append(f"[ERROR] {line.strip()}")
                                 output_lines.append(f"[ERROR] {line.strip()}")
-
                     break
 
-                # Small delay to prevent CPU spinning
                 time.sleep(0.01)
 
-            # Final display update
             log_display.code('\n'.join(output_lines), language='bash')
             status_display.info(f"Process finished with return code: {process.returncode}")
 
         st.session_state.ingestion_running = False
 
-        # Combine output and errors
         all_output = output_lines + error_lines
 
         if process.returncode == 0:
@@ -473,7 +1028,6 @@ def run_ingestion_script(log_container):
         error_details = traceback.format_exc()
         error_lines = [f"EXCEPTION: {str(e)}", "Full traceback:", error_details]
 
-        # Show error in log container
         with log_container:
             st.error('\n'.join(error_lines))
 
@@ -483,13 +1037,18 @@ def run_ingestion_script(log_container):
 async def chat_with_agent(user_message: str, context: Context):
     """Send a message to the LangGraph agent and get response."""
     try:
-        # Invoke the graph
+        config = {
+            "configurable": {
+                "thread_id": st.session_state.thread_id
+            }
+        }
+        
         result = await graph.ainvoke(
             {"messages": [("user", user_message)]},
+            config=config,
             context=context,
         )
 
-        # Extract the final message
         if result and "messages" in result and len(result["messages"]) > 0:
             final_message = result["messages"][-1]
             return final_message.content
@@ -497,17 +1056,9 @@ async def chat_with_agent(user_message: str, context: Context):
             return "No response received from agent."
 
     except Exception as e:
-        return f"Error: {str(e)}"
-
-
-def render_header():
-    """Render the main header."""
-    st.markdown("""
-    <div class="main-header">
-        <h1>🤖 LangGraph RAG Agent</h1>
-        <p>Intelligent document search and conversational AI</p>
-    </div>
-    """, unsafe_allow_html=True)
+        import traceback
+        error_details = traceback.format_exc()
+        return f"Error: {str(e)}\n\nDetails:\n{error_details}"
 
 
 def render_sidebar():
@@ -515,11 +1066,9 @@ def render_sidebar():
     with st.sidebar:
         st.markdown("### 📁 Document Management")
 
-        # Get current data
         files = get_files_in_data_dir()
         stats = get_processed_documents_stats()
 
-        # Stats row
         col1, col2, col3 = st.columns(3)
 
         with col1:
@@ -548,7 +1097,6 @@ def render_sidebar():
 
         st.markdown("---")
 
-        # File upload section
         st.markdown("#### ⬆️ Upload Documents")
 
         uploaded_files = st.file_uploader(
@@ -582,7 +1130,6 @@ def render_sidebar():
 
         st.markdown("---")
 
-        # Pipeline Controls
         st.markdown("#### 🔄 Pipeline Controls")
 
         col1, col2, col3 = st.columns(3)
@@ -590,31 +1137,25 @@ def render_sidebar():
         with col1:
             parse_clicked = st.button("🚀\nParse", disabled=st.session_state.ingestion_running, help="Parse and ingest documents", use_container_width=True)
 
-        # Handle parse button click outside the column to use full width
         if parse_clicked:
             if len(files) == 0:
                 st.warning("⚠️ No files to parse!")
             elif not INGESTION_SCRIPT.exists():
                 st.error(f"❌ Ingestion script not found at: {INGESTION_SCRIPT}")
             else:
-                # Create a container for real-time log output
                 st.markdown("---")
                 st.markdown("### 📋 Ingestion Progress")
                 st.markdown("*Live output from ingestion script*")
 
-                # Create log container that will be updated in real-time
                 log_container = st.container()
 
                 try:
-                    # Run the ingestion with real-time output
                     success, output = run_ingestion_script(log_container)
 
-                    # Save to session state to persist logs
                     st.session_state.show_ingestion_logs = True
                     st.session_state.ingestion_success = success
                     st.session_state.ingestion_log_output = output
 
-                    # Show results after completion
                     st.markdown("---")
                     if success:
                         st.success("✅ Ingestion completed successfully!")
@@ -622,13 +1163,7 @@ def render_sidebar():
                         st.balloons()
                     else:
                         st.error("❌ Ingestion failed! Check the logs above for details.")
-                        st.markdown("**Tip:** Look for `[ERROR]` lines in the log above")
-                        st.markdown("**Common issues:**")
-                        st.markdown("- API key issues (LLMWhisperer, NVIDIA, Qdrant)")
-                        st.markdown("- Network connectivity problems")
-                        st.markdown("- Invalid or corrupted documents")
 
-                    # Add close button
                     col_close1, col_close2, col_close3 = st.columns([1, 1, 1])
                     with col_close2:
                         if st.button("✖️ Close Logs & Refresh", type="primary", use_container_width=True):
@@ -643,27 +1178,22 @@ def render_sidebar():
                     with st.expander("🐛 Debug Info"):
                         st.code(traceback.format_exc())
 
-                    # Add close button for errors too
                     if st.button("✖️ Close Error Log"):
                         st.rerun()
 
-        # Show persistent logs if they exist
         elif st.session_state.show_ingestion_logs:
             st.markdown("---")
             st.markdown("### 📋 Ingestion Logs (Previous Run)")
 
-            # Show the saved logs
             if st.session_state.ingestion_log_output:
                 st.code('\n'.join(st.session_state.ingestion_log_output), language='bash')
 
-            # Show status
             st.markdown("---")
             if st.session_state.ingestion_success:
                 st.success("✅ Ingestion completed successfully!")
             else:
                 st.error("❌ Ingestion failed! Check the logs above for details.")
 
-            # Close button
             col_close1, col_close2, col_close3 = st.columns([1, 1, 1])
             with col_close2:
                 if st.button("✖️ Close Logs & Refresh", type="primary", use_container_width=True, key="close_persistent"):
@@ -697,7 +1227,6 @@ def render_sidebar():
 
         st.markdown("---")
 
-        # Documents list (collapsible)
         with st.expander(f"📄 Documents ({len(files)})", expanded=len(files) > 0 and len(files) <= 3):
             if len(files) == 0:
                 st.info("No documents uploaded")
@@ -719,100 +1248,163 @@ def render_sidebar():
 
         st.markdown("---")
 
-        # Settings
         st.markdown("#### ⚙️ Settings")
 
         with st.expander("LLM Configuration"):
             model_name = st.text_input(
                 "Model",
-                value="groq/openai/gpt-oss-120b",
+                value=st.session_state.model_name,
                 help="Format: provider/model-name",
             )
             st.session_state.model_name = model_name
+        
+        with st.expander("💾 Session Memory Info"):
+            st.markdown(f"""
+            <div class="session-info">
+                <strong>Session ID:</strong><br>
+                <code>{st.session_state.thread_id[:8]}...{st.session_state.thread_id[-8:]}</code><br>
+                <small>This ID tracks your conversation context</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown(f"""
+            <div class="session-info">
+                <strong>Messages in Memory:</strong> {len(st.session_state.messages)}<br>
+                <small>Agent remembers all messages in this session</small>
+            </div>
+            """, unsafe_allow_html=True)
 
 
 def render_chat_interface():
-    """Render the main chat interface."""
-    st.markdown("### 💬 Chat with Your Documents")
-
-    # Display chat messages
-    chat_container = st.container()
-
-    with chat_container:
-        for message in st.session_state.messages:
-            role = message["role"]
-            content = message["content"]
-
-            if role == "user":
-                st.markdown(f"""
-                <div class="user-message">
-                    <strong>You:</strong><br>{content}
-                </div>
-                """, unsafe_allow_html=True)
-            else:
-                st.markdown(f"""
-                <div class="assistant-message">
-                    <strong>🤖 Agent:</strong><br>{content}
-                </div>
-                """, unsafe_allow_html=True)
-
-    # Chat input
-    st.markdown("---")
-
-    col1, col2 = st.columns([6, 1])
-
-    with col1:
-        user_input = st.text_input(
-            "Your message:",
-            placeholder="Ask a question about your documents or the weather...",
-            key="user_input",
+    """Render the main chat interface with professional design."""
+    
+    # Check if user just asked initial question or clicked suggestion
+    user_just_asked_initial_question = (
+        st.session_state.initial_question is not None and st.session_state.initial_question
+    )
+    
+    user_just_clicked_suggestion = (
+        st.session_state.selected_suggestion is not None and st.session_state.selected_suggestion
+    )
+    
+    user_first_interaction = (
+        user_just_asked_initial_question or user_just_clicked_suggestion
+    )
+    
+    has_message_history = len(st.session_state.messages) > 0
+    
+    # Welcome screen for first-time users
+    if not user_first_interaction and not has_message_history:
+        st.markdown("""
+        <div class="welcome-container">
+            <div class="welcome-icon">🤖</div>
+            <div class="welcome-title">Welcome to LangGraph RAG Agent</div>
+            <div class="welcome-subtitle">Ask me anything about your documents or general questions</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Chat input at the bottom
+        st.chat_input("Ask a question...", key="initial_question")
+        
+        # Suggestion pills
+        st.markdown('<div class="suggestion-container">', unsafe_allow_html=True)
+        st.markdown('<div class="suggestion-title">Try asking:</div>', unsafe_allow_html=True)
+        st.pills(
+            label="Examples",
             label_visibility="collapsed",
+            options=list(SUGGESTIONS.keys()),
+            key="selected_suggestion",
         )
-
-    with col2:
-        send_button = st.button("Send 📤", type="primary", use_container_width=True)
-
-    # Process message
-    if send_button and user_input:
-        # Add user message
-        st.session_state.messages.append({"role": "user", "content": user_input})
-
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.stop()
+    
+    # Title row with restart button
+    title_row = st.container()
+    with title_row:
+        col1, col2 = st.columns([6, 1])
+        
+        with col1:
+            st.markdown("""
+            <div class="main-header">
+                <h1>💬 Chat with Your Documents</h1>
+                <p>Session memory enabled - I remember our conversation</p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with col2:
+            st.write("")  # Spacing
+            st.write("")  # Spacing
+            if st.button("🔄 Restart", use_container_width=True, type="secondary"):
+                st.session_state.messages = []
+                st.session_state.initial_question = None
+                st.session_state.selected_suggestion = None
+                st.session_state.thread_id = str(uuid.uuid4())
+                st.rerun()
+    
+    # Display chat messages
+    for i, message in enumerate(st.session_state.messages):
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+    
+    # Get user input
+    user_message = None
+    
+    if user_just_asked_initial_question:
+        user_message = st.session_state.initial_question
+        st.session_state.initial_question = None  # Reset
+    elif user_just_clicked_suggestion:
+        user_message = SUGGESTIONS[st.session_state.selected_suggestion]
+        st.session_state.selected_suggestion = None  # Reset
+    else:
+        user_message = st.chat_input("Ask a follow-up...")
+    
+    # Process user message
+    if user_message:
+        # Escape dollar signs for LaTeX
+        user_message = user_message.replace("$", r"\$")
+        
+        # Display user message
+        with st.chat_message("user"):
+            st.markdown(user_message)
+        
+        # Add to history
+        st.session_state.messages.append({"role": "user", "content": user_message})
+        
         # Get agent response
-        with st.spinner("🤔 Agent is thinking..."):
-            context = Context(
-                model=st.session_state.get("model_name", "groq/openai/gpt-oss-120b")
-            )
-
-            response = asyncio.run(chat_with_agent(user_input, context))
-
-        # Add assistant message
+        with st.chat_message("assistant"):
+            with st.spinner("🤔 Thinking..."):
+                context = Context(
+                    model=st.session_state.model_name
+                )
+                response = asyncio.run(chat_with_agent(user_message, context))
+            
+            st.markdown(response)
+        
+        # Add to history
         st.session_state.messages.append({"role": "assistant", "content": response})
-
-        # Rerun to update UI
+        
         st.rerun()
-
-    # Clear chat button
-    if len(st.session_state.messages) > 0:
-        if st.button("🗑️ Clear Chat History"):
-            st.session_state.messages = []
-            st.rerun()
 
 
 def main():
     """Main application."""
     initialize_session_state()
-
-    render_header()
+    
+    # Apply dark mode CSS
+    st.markdown(DARK_MODE_CSS, unsafe_allow_html=True)
+    
+    # Inject meteors HTML and styles
+    st.markdown(METEORS_HTML, unsafe_allow_html=True)
+    
     render_sidebar()
-
-    # Main content area
     render_chat_interface()
-
+    
     # Footer
     st.markdown("---")
     st.markdown("""
-    <div style="text-align: center; color: #64748b; font-size: 0.9rem;">
-        <p>Powered by LangGraph 🦜 | Built with Streamlit 🎈</p>
+    <div style="text-align: center; color: var(--text-secondary); font-size: 0.9rem; padding: 1rem; position: relative; z-index: 2; font-family: 'Plus Jakarta Sans', sans-serif;">
+        <p>Powered by LangGraph 🦜 | Built with Streamlit 🎈 | Session Memory Enabled 💾</p>
     </div>
     """, unsafe_allow_html=True)
 
