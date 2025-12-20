@@ -38,7 +38,7 @@ TRACKING_FILE = Path(__file__).parent / "processed_documents.json"
 ASSETS_DIR = Path(__file__).parent / "assets"
 MOON_IMAGE_PATH = ASSETS_DIR / "moon.png"
 MAX_FILE_SIZE_MB = 3
-MAX_FILES_UPLOAD = 2
+MAX_FILES_UPLOAD = 3
 QDRANT_COLLECTION_NAME = "document_chunks"
 
 # Page config
