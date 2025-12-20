@@ -786,6 +786,51 @@ METEORS_HTML = """
 """
 
 
+SIDEBAR_WIDTH_CSS = """
+<style>
+/* Make sidebar 35% when expanded */
+[data-testid="stSidebar"][aria-expanded="true"] {
+    width: 35% !important;
+    max-width: 45% !important;
+    min-width: 280px !important;
+}
+
+/* Keep collapsed sidebar narrow */
+[data-testid="stSidebar"][aria-expanded="false"] {
+    width: 56px !important;
+}
+
+/* Shift main content to account for the sidebar */
+.main > .block-container,
+[data-testid="stAppViewContainer"] > div:first-child {
+    margin-left: 35% !important;
+    width: calc(100% - 35%) !important;
+    transition: margin-left 0.18s ease, width 0.18s ease;
+}
+
+/* If your app uses a slightly different container class, include this too (safe fallback) */
+.reportview-container .main .block-container {
+    margin-left: 35% !important;
+    width: calc(100% - 35%) !important;
+}
+
+/* Responsive: on small screens let the sidebar overlay the content */
+@media (max-width: 900px) {
+    [data-testid="stSidebar"][aria-expanded="true"] {
+        position: fixed !important;
+        z-index: 999 !important;
+        width: 100% !important;
+    }
+    .main > .block-container,
+    [data-testid="stAppViewContainer"] > div:first-child {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+}
+</style>
+"""
+
+
 def initialize_session_state():
     """Initialize Streamlit session state variables."""
     if "messages" not in st.session_state:
@@ -1390,7 +1435,8 @@ def render_chat_interface():
 def main():
     """Main application."""
     initialize_session_state()
-    
+    st.markdown(SIDEBAR_WIDTH_CSS, unsafe_allow_html=True)
+
     # Apply dark mode CSS
     st.markdown(DARK_MODE_CSS, unsafe_allow_html=True)
     
