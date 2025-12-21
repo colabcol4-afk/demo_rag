@@ -51,7 +51,7 @@ st.set_page_config(
 
 # Suggestion prompts for first-time users
 SUGGESTIONS = {
-    "📊 Analyze my documents": "Can you analyze all the documents I've uploaded and give me a summary?",
+    "📊 Analyze my documents": "Can you give me a brief summary of all the documents I've uploaded ?",
     "🔍 Find specific information": "Help me find information about [topic] in my documents",
     "💡 What can you do?": "What are your capabilities? What can you help me with?",
     "🌤️ Check the weather": "What's the weather like today?",
