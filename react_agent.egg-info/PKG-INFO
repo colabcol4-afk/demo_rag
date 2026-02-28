@@ -4,7 +4,7 @@ Version: 0.0.1
 Summary: Starter template for making a custom Reasoning and Action agent (using tool calling) in LangGraph.
 Author-email: William Fu-Hinthorn <13333726+hinthornw@users.noreply.github.com>
 License: MIT
-Requires-Python: <4.0,>=3.11
+Requires-Python: <4.0,>=3.12
 Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: langgraph>=1.0.0
@@ -19,7 +19,8 @@ Requires-Dist: langchain-nvidia-ai-endpoints
 Requires-Dist: langchain-qdrant
 Requires-Dist: langchain-classic
 Requires-Dist: qdrant-client>=1.7.0
-Requires-Dist: llmwhisperer-client
+Requires-Dist: llmwhisperer-client==2.5.0
+Requires-Dist: langchain-experimental==0.4.1
 Provides-Extra: dev
 Requires-Dist: mypy>=1.11.1; extra == "dev"
 Requires-Dist: ruff>=0.6.1; extra == "dev"

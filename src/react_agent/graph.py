@@ -10,7 +10,6 @@ from langchain_core.messages import AIMessage
 from langgraph.graph import StateGraph
 from langgraph.prebuilt import ToolNode
 from langgraph.runtime import Runtime
-from langgraph.checkpoint.memory import MemorySaver  # ADD THIS
 
 from react_agent.context import Context
 from react_agent.state import InputState, State
@@ -114,10 +113,6 @@ builder.add_conditional_edges(
 
 builder.add_edge("tools", "call_model")
 
-# ============================================
-# SESSION MEMORY - ADD THESE 3 LINES
-# ============================================
-memory = MemorySaver()
-
-# Compile the builder into an executable graph with memory
-graph = builder.compile(checkpointer=memory, name="ReAct Agent")
+# Compile the builder into an executable graph.
+# In LangGraph CLI/API environments, persistence is managed by the runtime.
+graph = builder.compile(name="ReAct Agent")

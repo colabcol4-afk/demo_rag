@@ -10,7 +10,8 @@ langchain-nvidia-ai-endpoints
 langchain-qdrant
 langchain-classic
 qdrant-client>=1.7.0
-llmwhisperer-client
+llmwhisperer-client==2.5.0
+langchain-experimental==0.4.1
 
 [dev]
 mypy>=1.11.1
